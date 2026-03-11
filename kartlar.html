@@ -6,172 +6,256 @@
 <title>Kartlar</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:#0e0e12; --surface:#1a1a22; --card-front:#1e1e2e; --card-back:#12221e;
-    --accent:#7ee8a2; --accent2:#5ec4ff; --gold:#f5c842;
-    --text:#f0ede8; --muted:#888899; --border:rgba(255,255,255,.07); --danger:#ff8888;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-  body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-    background:radial-gradient(ellipse 60% 40% at 20% 20%,rgba(126,232,162,.06),transparent 60%),
-               radial-gradient(ellipse 50% 50% at 80% 80%,rgba(94,196,255,.05),transparent 60%)}
+:root{
+  --bg:#0e0e12;--surface:#1a1a22;--card-front:#1e1e2e;--card-back:#12221e;
+  --accent:#7ee8a2;--accent2:#5ec4ff;--gold:#f5c842;--purple:#c084fc;
+  --text:#f0ede8;--muted:#888899;--border:rgba(255,255,255,.07);--danger:#ff8888;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 60% 40% at 20% 20%,rgba(126,232,162,.05),transparent 60%),
+             radial-gradient(ellipse 50% 50% at 80% 80%,rgba(94,196,255,.04),transparent 60%)}
 
-  .page{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;align-items:center;padding:24px 20px 80px}
-  .page.active{display:flex}
+.page{display:none;position:relative;z-index:1;min-height:100vh;flex-direction:column;align-items:center;padding:24px 18px 90px}
+.page.active{display:flex}
 
-  /* HOME */
-  #home{justify-content:center;gap:32px}
-  .logo h1{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,9vw,4.5rem);font-weight:700;letter-spacing:-2px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .logo p{color:var(--muted);font-size:.75rem;letter-spacing:3px;text-transform:uppercase;margin-top:6px;text-align:center}
-  .stats-bar{display:flex;width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px}
-  .stat{text-align:center;flex:1}
-  .stat-num{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--accent)}
-  .stat-label{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
-  .stat-div{width:1px;background:var(--border);align-self:stretch;margin:0 6px}
-  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:400px}
-  .mc{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px 14px;cursor:pointer;
-    transition:all .22s;display:flex;flex-direction:column;align-items:center;gap:8px;overflow:hidden;position:relative}
-  .mc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(126,232,162,.06),transparent);opacity:0;transition:.3s}
-  .mc:active{transform:scale(.96);border-color:rgba(126,232,162,.3)}
-  .mc:active::after{opacity:1}
-  .mc-icon{font-size:1.7rem}
-  .mc-info h3{font-size:.9rem;font-weight:500;text-align:center}
-  .mc-info p{font-size:.68rem;color:var(--muted);text-align:center;margin-top:2px}
+/* ═══ HOME ═══ */
+#home{justify-content:center;gap:28px}
+.logo{text-align:center}
+.logo h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,9vw,4.2rem);font-weight:700;letter-spacing:-2px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo p{color:var(--muted);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;margin-top:5px}
+.stats-bar{display:flex;width:100%;max-width:400px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 18px}
+.stat{text-align:center;flex:1}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.65rem;color:var(--accent)}
+.stat-label{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.stat-div{width:1px;background:var(--border);align-self:stretch;margin:0 4px}
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:400px}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px 12px;cursor:pointer;
+  transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative;overflow:hidden}
+.mc::after{content:'';position:absolute;inset:0;opacity:0;transition:.3s;
+  background:linear-gradient(135deg,rgba(126,232,162,.06),transparent)}
+.mc:active{transform:scale(.96);border-color:rgba(126,232,162,.3)}
+.mc:active::after{opacity:1}
+.mc-icon{font-size:1.65rem}
+.mc h3{font-size:.88rem;font-weight:500;text-align:center}
+.mc p{font-size:.66rem;color:var(--muted);text-align:center;margin-top:1px}
+.mc.grammar-mc::after{background:linear-gradient(135deg,rgba(192,132,252,.08),transparent)}
+.mc.grammar-mc:active{border-color:rgba(192,132,252,.35)}
 
-  /* STUDY */
-  .study-hdr{width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-  .back-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 13px;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.8rem;transition:.2s}
-  .deck-title{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--accent)}
-  .counter{font-size:.8rem;color:var(--muted)}
-  .prog-wrap{width:100%;max-width:440px;height:4px;background:var(--surface);border-radius:2px;margin-bottom:24px;overflow:hidden}
-  .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s}
-  .card-scene{width:100%;max-width:440px;height:275px;perspective:1200px;cursor:pointer;margin-bottom:18px}
-  .card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.4,0,.2,1)}
-  .card-inner.flipped{transform:rotateY(180deg)}
-  .card-face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px;border:1px solid var(--border)}
-  .card-front{background:var(--card-front);background-image:radial-gradient(ellipse at 80% 20%,rgba(94,196,255,.08),transparent 50%),radial-gradient(ellipse at 20% 80%,rgba(126,232,162,.06),transparent 50%)}
-  .card-back{background:var(--card-back);background-image:radial-gradient(ellipse at 20% 20%,rgba(126,232,162,.1),transparent 50%);transform:rotateY(180deg)}
-  .card-badge{position:absolute;top:13px;left:16px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-  .snd-btn{position:absolute;top:9px;right:12px;background:rgba(126,232,162,.1);border:none;border-radius:9px;padding:7px 9px;cursor:pointer;font-size:.9rem;color:var(--accent);transition:.2s}
-  .card-word{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,5.5vw,2.3rem);font-weight:700;text-align:center;line-height:1.2}
-  .card-hint{margin-top:7px;font-size:.72rem;color:var(--muted);letter-spacing:1px}
-  .card-tr{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,5vw,1.9rem);font-weight:700;text-align:center;color:var(--accent);margin-bottom:10px}
-  .card-ex{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.6;font-style:italic;border-top:1px solid var(--border);padding-top:11px;margin-top:5px;width:100%}
-  .card-ex span{display:block;color:rgba(240,237,232,.4);font-style:normal;margin-top:3px;font-size:.72rem}
-  .flip-hint{font-size:.7rem;color:var(--muted);text-align:center;opacity:.55;margin-bottom:6px}
-  .action-btns{display:flex;gap:11px;width:100%;max-width:440px;margin-bottom:10px}
-  .btn-knew,.btn-didnt{flex:1;padding:13px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:.2s}
-  .btn-knew{background:rgba(126,232,162,.12);color:var(--accent);border:1px solid rgba(126,232,162,.2)}
-  .btn-didnt{background:rgba(255,100,100,.09);color:var(--danger);border:1px solid rgba(255,100,100,.17)}
+/* ═══ STUDY ═══ */
+.study-hdr{width:100%;max-width:440px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.back-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 12px;border-radius:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.78rem}
+.deck-title{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--accent)}
+.counter{font-size:.78rem;color:var(--muted)}
+.prog-wrap{width:100%;max-width:440px;height:3px;background:var(--surface);border-radius:2px;margin-bottom:22px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s}
+.card-scene{width:100%;max-width:440px;height:270px;perspective:1200px;cursor:pointer;margin-bottom:16px}
+.card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.card-inner.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;border:1px solid var(--border)}
+.card-front{background:var(--card-front);background-image:radial-gradient(ellipse at 80% 20%,rgba(94,196,255,.08),transparent 50%),radial-gradient(ellipse at 20% 80%,rgba(126,232,162,.06),transparent 50%)}
+.card-back{background:var(--card-back);background-image:radial-gradient(ellipse at 20% 20%,rgba(126,232,162,.1),transparent 50%);transform:rotateY(180deg)}
+.card-badge{position:absolute;top:12px;left:15px;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.snd-btn{position:absolute;top:9px;right:11px;background:rgba(126,232,162,.1);border:none;border-radius:9px;padding:6px 8px;cursor:pointer;font-size:.88rem;color:var(--accent)}
+.card-word{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,5.5vw,2.2rem);font-weight:700;text-align:center;line-height:1.2}
+.card-hint{margin-top:7px;font-size:.7rem;color:var(--muted);letter-spacing:1px}
+.card-tr{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,5vw,1.8rem);font-weight:700;text-align:center;color:var(--accent);margin-bottom:9px}
+.card-ex{font-size:.76rem;color:var(--muted);text-align:center;line-height:1.6;font-style:italic;border-top:1px solid var(--border);padding-top:10px;margin-top:5px;width:100%}
+.card-ex span{display:block;color:rgba(240,237,232,.38);font-style:normal;margin-top:3px;font-size:.7rem}
+.flip-hint{font-size:.68rem;color:var(--muted);text-align:center;opacity:.5;margin-bottom:5px}
+.action-btns{display:flex;gap:10px;width:100%;max-width:440px;margin-bottom:8px}
+.btn-knew,.btn-didnt{flex:1;padding:13px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;cursor:pointer;transition:.2s}
+.btn-knew{background:rgba(126,232,162,.11);color:var(--accent);border:1px solid rgba(126,232,162,.19)}
+.btn-didnt{background:rgba(255,100,100,.09);color:var(--danger);border:1px solid rgba(255,100,100,.16)}
 
-  /* FAB */
-  .fab{position:fixed;bottom:26px;right:22px;width:50px;height:50px;border-radius:50%;
-    background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;font-size:1.4rem;
-    cursor:pointer;box-shadow:0 4px 18px rgba(126,232,162,.3);z-index:50;display:none;align-items:center;justify-content:center;color:#0e0e12;font-weight:700;transition:.2s}
-  .fab:active{transform:scale(.9)}
-  #study.active .fab{display:flex}
+/* FAB */
+.fab{position:fixed;bottom:24px;right:20px;width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;font-size:1.3rem;
+  cursor:pointer;box-shadow:0 4px 16px rgba(126,232,162,.28);z-index:50;display:none;
+  align-items:center;justify-content:center;color:#0e0e12;font-weight:700}
+.fab:active{transform:scale(.88)}
+#study.active .fab{display:flex}
 
-  /* DETAIL PANEL */
-  #detailPanel{position:fixed;inset:0;z-index:100;display:none}
-  #detailPanel.open{display:block}
-  .d-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
-  .d-sheet{position:absolute;bottom:0;left:0;right:0;max-height:86vh;background:#16161f;
-    border-radius:26px 26px 0 0;border:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;animation:su .32s ease}
-  @keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
-  .d-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:11px auto 0;flex-shrink:0}
-  .d-hdr{padding:14px 18px 11px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-  .d-word{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--accent)}
-  .d-close{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;padding:3px 7px}
-  .d-body{overflow-y:auto;padding:14px 18px 28px;flex:1}
-  .d-loading{text-align:center;color:var(--muted);padding:36px 0;font-size:.88rem}
-  .spin{display:inline-block;animation:sp 1s linear infinite;font-size:1.4rem}
-  @keyframes sp{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-  .d-sec{margin-bottom:18px}
-  .d-sec h4{font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
-  .d-sec p{font-size:.85rem;line-height:1.65}
-  .s-list{display:flex;flex-direction:column;gap:9px}
-  .s-item{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:11px 13px}
-  .s-tag{display:inline-block;font-size:.58rem;text-transform:uppercase;letter-spacing:1px;background:rgba(126,232,162,.1);color:var(--accent);border-radius:4px;padding:2px 6px;margin-bottom:5px}
-  .s-fr{font-size:.85rem;margin-bottom:3px}
-  .s-tr{font-size:.76rem;color:var(--muted)}
+/* ═══ DETAIL PANEL ═══ */
+#detailPanel{position:fixed;inset:0;z-index:100;display:none}
+#detailPanel.open{display:block}
+.d-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)}
+.d-sheet{position:absolute;bottom:0;left:0;right:0;max-height:88vh;background:#16161f;
+  border-radius:26px 26px 0 0;border:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;animation:su .3s ease}
+@keyframes su{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.d-handle{width:36px;height:3px;background:var(--border);border-radius:2px;margin:10px auto 0;flex-shrink:0}
+.d-hdr{padding:13px 17px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.d-word{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--accent)}
+.d-close{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;padding:3px 7px}
+.d-body{overflow-y:auto;padding:14px 17px 28px;flex:1}
+.d-sec{margin-bottom:16px}
+.d-sec h4{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:7px}
+.d-sec p{font-size:.84rem;line-height:1.65}
+.s-list{display:flex;flex-direction:column;gap:8px}
+.s-item{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:10px 13px}
+.s-tag{display:inline-block;font-size:.57rem;text-transform:uppercase;letter-spacing:1px;
+  background:rgba(126,232,162,.1);color:var(--accent);border-radius:4px;padding:2px 6px;margin-bottom:4px}
+.s-fr{font-size:.84rem;margin-bottom:3px}
+.s-tr{font-size:.74rem;color:var(--muted)}
 
-  /* DONE */
-  #done{justify-content:center;gap:18px;text-align:center}
-  .done-emoji{font-size:3.2rem}
-  .done-title{font-family:'Playfair Display',serif;font-size:2rem;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .done-stats{display:flex;gap:24px;padding:18px 32px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
-  .dsn{font-family:'Playfair Display',serif;font-size:1.8rem}
-  .dsn.g{color:var(--accent)}.dsn.r{color:var(--danger)}
-  .dsl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-  .btn-restart{background:rgba(126,232,162,.12);border:1px solid rgba(126,232,162,.2);color:var(--accent);padding:13px 32px;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:.2s}
-  .btn-home{background:none;border:1px solid var(--border);color:var(--muted);padding:11px 26px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.85rem;cursor:pointer;transition:.2s}
+/* ═══ DONE ═══ */
+#done{justify-content:center;gap:16px;text-align:center}
+.done-emoji{font-size:3rem}
+.done-title{font-family:'Playfair Display',serif;font-size:1.9rem;
+  background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.done-stats{display:flex;gap:20px;padding:16px 28px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+.dsn{font-family:'Playfair Display',serif;font-size:1.7rem}
+.dsn.g{color:var(--accent)}.dsn.r{color:var(--danger)}
+.dsl{font-size:.66rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.btn-restart{background:rgba(126,232,162,.11);border:1px solid rgba(126,232,162,.19);color:var(--accent);
+  padding:12px 30px;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer}
+.btn-home2{background:none;border:1px solid var(--border);color:var(--muted);
+  padding:10px 24px;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.83rem;cursor:pointer}
 
-  /* JOURNAL */
-  #journal{align-items:stretch;max-width:440px;width:100%;margin:0 auto}
-  .j-hdr{display:flex;align-items:center;gap:11px;margin-bottom:22px;width:100%}
-  .j-hdr h2{font-family:'Playfair Display',serif;font-size:1.4rem;flex:1}
-  .j-back{background:none;border:1px solid var(--border);color:var(--muted);padding:7px 12px;border-radius:9px;cursor:pointer;font-size:.78rem;font-family:'DM Sans',sans-serif}
-  .j-list{display:flex;flex-direction:column;gap:10px;width:100%}
-  .j-card{background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:15px 16px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px}
-  .j-card:active{border-color:rgba(126,232,162,.25);transform:scale(.98)}
-  .j-icon{font-size:1.3rem;width:40px;height:40px;background:rgba(126,232,162,.07);border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .j-info h4{font-size:.9rem;font-weight:500}
-  .j-info p{font-size:.72rem;color:var(--muted);margin-top:2px}
-  .j-arrow{margin-left:auto;color:var(--muted);font-size:1.1rem}
-  .add-btn{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);
-    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0e0e12;border:none;
-    padding:13px 30px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;
-    cursor:pointer;box-shadow:0 5px 20px rgba(126,232,162,.28);transition:.2s;z-index:10;white-space:nowrap}
-  .add-btn:active{transform:translateX(-50%) scale(.96)}
-  .empty-j{text-align:center;padding:50px 0;color:var(--muted)}
-  .empty-j .ei{font-size:2.8rem;margin-bottom:10px}
-  .empty-j p{font-size:.85rem}
+/* ═══ JOURNAL ═══ */
+#journal{align-items:stretch;max-width:440px;width:100%;margin:0 auto}
+.j-hdr{display:flex;align-items:center;gap:10px;margin-bottom:20px;width:100%}
+.j-hdr h2{font-family:'Playfair Display',serif;font-size:1.35rem;flex:1}
+.j-back{background:none;border:1px solid var(--border);color:var(--muted);padding:6px 11px;border-radius:9px;cursor:pointer;font-size:.76rem;font-family:'DM Sans',sans-serif}
+.j-list{display:flex;flex-direction:column;gap:9px;width:100%}
+.j-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 15px;
+  cursor:pointer;transition:.2s;display:flex;align-items:center;gap:11px}
+.j-card:active{border-color:rgba(126,232,162,.22);transform:scale(.98)}
+.j-icon{font-size:1.2rem;width:38px;height:38px;background:rgba(126,232,162,.07);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.j-info h4{font-size:.88rem;font-weight:500}
+.j-info p{font-size:.7rem;color:var(--muted);margin-top:2px}
+.j-arrow{margin-left:auto;color:var(--muted)}
+.add-btn{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0e0e12;border:none;
+  padding:12px 28px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;
+  cursor:pointer;box-shadow:0 5px 18px rgba(126,232,162,.25);z-index:10;white-space:nowrap}
+.empty-j{text-align:center;padding:50px 0;color:var(--muted)}
+.empty-j .ei{font-size:2.5rem;margin-bottom:9px}
+.empty-j p{font-size:.83rem}
 
-  /* NOTE EDITOR */
-  #noteEditor{align-items:stretch;max-width:440px;width:100%;margin:0 auto}
-  .ne-hdr{display:flex;align-items:center;gap:10px;margin-bottom:16px;width:100%}
-  .ne-title{flex:1;background:none;border:none;border-bottom:2px solid var(--accent);color:var(--text);
-    font-family:'Playfair Display',serif;font-size:1.25rem;padding:4px 0;outline:none}
-  .ne-title::placeholder{color:var(--muted)}
-  .ne-date{font-size:.72rem;color:var(--muted);margin-bottom:14px;width:100%}
-  .lined{flex:1;width:100%;min-height:62vh}
-  .lined textarea{width:100%;min-height:62vh;background:transparent;border:none;outline:none;
-    color:var(--text);font-family:'Caveat',cursive;font-size:1.12rem;line-height:2.35rem;resize:none;padding:0 4px;
-    background-image:repeating-linear-gradient(transparent,transparent calc(2.35rem - 1px),rgba(255,255,255,.055) calc(2.35rem - 1px),rgba(255,255,255,.055) 2.35rem);
-    background-attachment:local}
-  .lined textarea::placeholder{color:rgba(136,136,153,.38)}
-  .save-btn{position:fixed;bottom:26px;right:22px;background:var(--accent);color:#0e0e12;border:none;
-    padding:11px 22px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:500;
-    cursor:pointer;box-shadow:0 4px 14px rgba(126,232,162,.28);z-index:10}
+/* ═══ NOTE EDITOR ═══ */
+#noteEditor{align-items:stretch;max-width:440px;width:100%;margin:0 auto}
+.ne-hdr{display:flex;align-items:center;gap:9px;margin-bottom:14px;width:100%}
+.ne-title{flex:1;background:none;border:none;border-bottom:2px solid var(--accent);color:var(--text);
+  font-family:'Playfair Display',serif;font-size:1.2rem;padding:4px 0;outline:none}
+.ne-title::placeholder{color:var(--muted)}
+.ne-date{font-size:.7rem;color:var(--muted);margin-bottom:13px;width:100%}
+.lined{flex:1;width:100%;min-height:60vh}
+.lined textarea{width:100%;min-height:60vh;background:transparent;border:none;outline:none;
+  color:var(--text);font-family:'Caveat',cursive;font-size:1.1rem;line-height:2.3rem;resize:none;padding:0 3px;
+  background-image:repeating-linear-gradient(transparent,transparent calc(2.3rem - 1px),rgba(255,255,255,.052) calc(2.3rem - 1px),rgba(255,255,255,.052) 2.3rem);
+  background-attachment:local}
+.lined textarea::placeholder{color:rgba(136,136,153,.36)}
+.save-btn{position:fixed;bottom:24px;right:20px;background:var(--accent);color:#0e0e12;border:none;
+  padding:11px 20px;border-radius:50px;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:500;
+  cursor:pointer;box-shadow:0 4px 13px rgba(126,232,162,.26);z-index:10}
+
+/* ═══ GRAMMAR ═══ */
+#grammar{align-items:stretch;max-width:440px;width:100%;margin:0 auto;gap:0}
+.gr-hdr{display:flex;align-items:center;gap:10px;margin-bottom:8px;width:100%;flex-shrink:0}
+.gr-hdr h2{font-family:'Playfair Display',serif;font-size:1.35rem;flex:1;
+  background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Topic list */
+.gr-topics{display:flex;flex-direction:column;gap:8px;width:100%}
+.gr-topic-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:14px 16px;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px;position:relative;overflow:hidden}
+.gr-topic-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:0 2px 2px 0}
+.gr-topic-card.done-topic{opacity:.6}
+.gr-topic-card:active{transform:scale(.97)}
+.gr-topic-num{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--muted);width:28px;flex-shrink:0;text-align:center}
+.gr-topic-info{flex:1}
+.gr-topic-info h4{font-size:.9rem;font-weight:500}
+.gr-topic-info p{font-size:.7rem;color:var(--muted);margin-top:2px}
+.gr-topic-badge{font-size:.62rem;padding:3px 8px;border-radius:20px;font-weight:500;flex-shrink:0}
+.badge-new{background:rgba(126,232,162,.12);color:var(--accent);border:1px solid rgba(126,232,162,.2)}
+.badge-done{background:rgba(136,136,153,.1);color:var(--muted);border:1px solid var(--border)}
+.badge-today{background:rgba(245,200,66,.12);color:var(--gold);border:1px solid rgba(245,200,66,.2)}
+
+/* Grammar lesson page */
+#grammarLesson{align-items:stretch;max-width:440px;width:100%;margin:0 auto}
+.gl-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px;width:100%}
+.gl-hdr h2{font-family:'Playfair Display',serif;font-size:1.15rem;flex:1;line-height:1.3}
+.gl-progress{width:100%;height:3px;background:var(--surface);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.gl-prog-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--accent2));border-radius:2px;transition:width .4s}
+
+/* Lesson card flip */
+.gl-card-scene{width:100%;height:300px;perspective:1200px;cursor:pointer;margin-bottom:16px}
+.gl-card-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.gl-card-inner.flipped{transform:rotateY(180deg)}
+.gl-face{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  display:flex;flex-direction:column;justify-content:center;padding:22px;border:1px solid var(--border)}
+.gl-front{background:linear-gradient(135deg,#1a1228,#0e1a22);background-image:radial-gradient(ellipse at 80% 20%,rgba(192,132,252,.1),transparent 50%)}
+.gl-back{background:linear-gradient(135deg,#0e1a22,#121a14);background-image:radial-gradient(ellipse at 20% 20%,rgba(94,196,255,.08),transparent 50%);transform:rotateY(180deg)}
+.gl-badge-top{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.gl-rule-title{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--purple);margin-bottom:10px;line-height:1.3}
+.gl-rule-body{font-size:.84rem;line-height:1.7;color:var(--text)}
+.gl-rule-body strong{color:var(--accent2)}
+.gl-rule-body em{color:var(--gold);font-style:normal}
+.gl-tap-hint{margin-top:12px;font-size:.68rem;color:var(--muted);letter-spacing:1px}
+
+.gl-back-title{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px}
+.gl-examples{display:flex;flex-direction:column;gap:9px}
+.gl-ex-item{background:rgba(255,255,255,.04);border-radius:10px;padding:10px 12px;border-left:2px solid var(--accent)}
+.gl-ex-fr{font-size:.86rem;color:var(--text);margin-bottom:3px}
+.gl-ex-tr{font-size:.75rem;color:var(--muted)}
+
+.gl-action-btns{display:flex;gap:10px;width:100%;margin-bottom:8px}
+.gl-btn-next{flex:1;padding:13px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;cursor:pointer;
+  background:rgba(192,132,252,.12);color:var(--purple);border:1px solid rgba(192,132,252,.2);transition:.2s}
+.gl-btn-repeat{flex:1;padding:13px;border:none;border-radius:13px;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;cursor:pointer;
+  background:rgba(255,100,100,.09);color:var(--danger);border:1px solid rgba(255,100,100,.16);transition:.2s}
+.gl-flip-hint{font-size:.68rem;color:var(--muted);text-align:center;opacity:.5;margin-bottom:5px}
+
+/* Grammar done screen */
+.gl-done{text-align:center;padding:40px 0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.gl-done-icon{font-size:3rem}
+.gl-done-title{font-family:'Playfair Display',serif;font-size:1.8rem;
+  background:linear-gradient(135deg,var(--purple),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Progress bar colors per topic */
+.color-0::before{background:var(--accent)}
+.color-1::before{background:var(--accent2)}
+.color-2::before{background:var(--gold)}
+.color-3::before{background:var(--purple)}
+.color-4::before{background:#f97316}
+.color-5::before{background:#ec4899}
+.color-6::before{background:#06b6d4}
+.color-7::before{background:#84cc16}
+.color-8::before{background:#f59e0b}
+.color-9::before{background:#a78bfa}
 </style>
 </head>
 <body>
 
-<!-- HOME -->
+<!-- ══════════ HOME ══════════ -->
 <div id="home" class="page active">
-  <div class="logo" style="text-align:center">
-    <h1>Kartlar</h1>
-    <p>Günlük Fransızca</p>
-  </div>
+  <div class="logo"><h1>Kartlar</h1><p>Günlük Fransızca</p></div>
   <div class="stats-bar">
-    <div class="stat"><div class="stat-num" id="totalCards">25</div><div class="stat-label">Kart</div></div>
-    <div class="stat-div"></div>
     <div class="stat"><div class="stat-num" id="streakNum">0</div><div class="stat-label">Seri</div></div>
     <div class="stat-div"></div>
     <div class="stat"><div class="stat-num" id="masteredNum">0</div><div class="stat-label">Öğrenildi</div></div>
+    <div class="stat-div"></div>
+    <div class="stat"><div class="stat-num" id="grDoneNum">0</div><div class="stat-label">Gramer</div></div>
   </div>
   <div class="menu-grid">
-    <div class="mc" onclick="startStudy('today')"><div class="mc-icon">🗓️</div><div class="mc-info"><h3>Bugünün Destesi</h3><p>25 kart · Fransızca</p></div></div>
-    <div class="mc" onclick="startStudy('shuffle')"><div class="mc-icon">🔀</div><div class="mc-info"><h3>Karışık Çalış</h3><p>Tüm kartlar rastgele</p></div></div>
-    <div class="mc" onclick="startStudy('hard')"><div class="mc-icon">🔥</div><div class="mc-info"><h3>Zor Kartlar</h3><p>Bilinmeyenler tekrar</p></div></div>
-    <div class="mc" onclick="showPage('journal')"><div class="mc-icon">📓</div><div class="mc-info"><h3>Günlüğüm</h3><p>Notlar · Cümleler</p></div></div>
+    <div class="mc" onclick="startStudy('today')"><div class="mc-icon">🗓️</div><h3>Bugünün Destesi</h3><p>25 kart · Fransızca</p></div>
+    <div class="mc" onclick="startStudy('shuffle')"><div class="mc-icon">🔀</div><h3>Karışık Çalış</h3><p>Tüm kartlar rastgele</p></div>
+    <div class="mc" onclick="startStudy('hard')"><div class="mc-icon">🔥</div><h3>Zor Kartlar</h3><p>Bilinmeyenler tekrar</p></div>
+    <div class="mc" onclick="showPage('journal')"><div class="mc-icon">📓</div><h3>Günlüğüm</h3><p>Notlar · Cümleler</p></div>
+    <div class="mc grammar-mc" onclick="showPage('grammar')" style="grid-column:1/-1;flex-direction:row;justify-content:flex-start;gap:14px;padding:18px 20px">
+      <div class="mc-icon">📐</div>
+      <div><h3 style="text-align:left">Grammaire Progressive</h3><p style="text-align:left">A1 Gramer Konuları · Çevrimdışı</p></div>
+      <div style="margin-left:auto;color:var(--muted)">›</div>
+    </div>
   </div>
 </div>
 
-<!-- STUDY -->
+<!-- ══════════ STUDY ══════════ -->
 <div id="study" class="page">
   <div class="study-hdr">
     <button class="back-btn" onclick="goHome()">← Geri</button>
@@ -202,7 +286,7 @@
   <button class="fab" onclick="openDetail()">+</button>
 </div>
 
-<!-- DETAIL PANEL -->
+<!-- ══════════ DETAIL PANEL ══════════ -->
 <div id="detailPanel">
   <div class="d-backdrop" onclick="closeDetail()"></div>
   <div class="d-sheet">
@@ -211,27 +295,25 @@
       <div class="d-word" id="dWord"></div>
       <button class="d-close" onclick="closeDetail()">✕</button>
     </div>
-    <div class="d-body" id="dBody">
-      <div class="d-loading"><div class="spin">⟳</div><br>Analiz ediliyor...</div>
-    </div>
+    <div class="d-body" id="dBody"></div>
   </div>
 </div>
 
-<!-- DONE -->
+<!-- ══════════ DONE ══════════ -->
 <div id="done" class="page">
   <div class="done-emoji">🎉</div>
   <div class="done-title">Harika!</div>
-  <p style="color:var(--muted);font-size:.85rem">Bugünün destesini tamamladın</p>
+  <p style="color:var(--muted);font-size:.83rem">Bugünün destesini tamamladın</p>
   <div class="done-stats">
     <div class="stat"><div class="dsn g" id="knewCount">0</div><div class="dsl">Bildim</div></div>
     <div class="stat-div"></div>
     <div class="stat"><div class="dsn r" id="didntCount">0</div><div class="dsl">Bilmedim</div></div>
   </div>
   <button class="btn-restart" onclick="startStudy('hard')">🔥 Zor Kartları Tekrar Et</button>
-  <button class="btn-home" onclick="goHome()">Ana Sayfaya Dön</button>
+  <button class="btn-home2" onclick="goHome()">Ana Sayfaya Dön</button>
 </div>
 
-<!-- JOURNAL -->
+<!-- ══════════ JOURNAL ══════════ -->
 <div id="journal" class="page">
   <div class="j-hdr">
     <button class="j-back" onclick="goHome()">← Geri</button>
@@ -241,78 +323,237 @@
   <button class="add-btn" onclick="addDay()">+ Yeni Gün Ekle</button>
 </div>
 
-<!-- NOTE EDITOR -->
+<!-- ══════════ NOTE EDITOR ══════════ -->
 <div id="noteEditor" class="page">
   <div class="ne-hdr">
     <button class="j-back" onclick="showPage('journal')">← Geri</button>
     <input class="ne-title" id="nTitle" placeholder="Not başlığı..." maxlength="40">
   </div>
   <div class="ne-date" id="nDate"></div>
-  <div class="lined">
-    <textarea id="nText" placeholder="Bugün öğrendiklerini yaz... Fransızca cümleler kur, düşüncelerini not et..."></textarea>
-  </div>
+  <div class="lined"><textarea id="nText" placeholder="Bugün öğrendiklerini yaz... Fransızca cümleler kur..."></textarea></div>
   <button class="save-btn" onclick="saveNote()">Kaydet ✓</button>
 </div>
 
+<!-- ══════════ GRAMMAR LIST ══════════ -->
+<div id="grammar" class="page">
+  <div class="gr-hdr">
+    <button class="j-back" onclick="goHome()">← Geri</button>
+    <h2>📐 Grammaire</h2>
+  </div>
+  <p style="font-size:.78rem;color:var(--muted);margin-bottom:16px;width:100%;text-align:center">Günde 2 konu · A1 Seviyesi · Çevrimdışı</p>
+  <div class="gr-topics" id="grTopicList"></div>
+</div>
+
+<!-- ══════════ GRAMMAR LESSON ══════════ -->
+<div id="grammarLesson" class="page">
+  <div class="gl-hdr">
+    <button class="j-back" onclick="showPage('grammar')">← Geri</button>
+    <h2 id="glTitle">Konu</h2>
+  </div>
+  <div class="gl-progress"><div class="gl-prog-fill" id="glProgFill" style="width:0%"></div></div>
+  <div id="glContent"></div>
+</div>
+
 <script>
-const CARDS = [
-  {fr:"le marché",tr:"pazar",ex:"Je vais au marché le dimanche.",exTr:"Pazar günleri pazara gidiyorum."},
-  {fr:"la boulangerie",tr:"fırın / ekmekçi",ex:"La boulangerie ouvre à sept heures.",exTr:"Fırın saat yedide açılıyor."},
-  {fr:"la mairie",tr:"belediye",ex:"Je dois aller à la mairie demain.",exTr:"Yarın belediyeye gitmem gerekiyor."},
-  {fr:"l'épicerie",tr:"bakkal",ex:"Il achète du lait à l'épicerie.",exTr:"Bakkaldansüt alıyor."},
-  {fr:"le trottoir",tr:"kaldırım",ex:"Marche sur le trottoir, pas sur la route.",exTr:"Yolda değil kaldırımda yürü."},
-  {fr:"l'addition",tr:"hesap (restoranda)",ex:"L'addition, s'il vous plaît!",exTr:"Hesabı getirir misiniz lütfen!"},
-  {fr:"le voisin / la voisine",tr:"komşu",ex:"Mon voisin est très sympa.",exTr:"Komşum çok sempatik."},
-  {fr:"excusez-moi",tr:"affedersiniz",ex:"Excusez-moi, où est la gare?",exTr:"Affedersiniz, istasyon nerede?"},
-  {fr:"je ne comprends pas",tr:"anlamıyorum",ex:"Parlez lentement, je ne comprends pas.",exTr:"Yavaş konuşun, anlamıyorum."},
-  {fr:"pouvez-vous répéter?",tr:"tekrar eder misiniz?",ex:"Pouvez-vous répéter plus lentement?",exTr:"Daha yavaş tekrar eder misiniz?"},
-  {fr:"bientôt",tr:"yakında",ex:"À bientôt!",exTr:"Yakında görüşürüz!"},
-  {fr:"parfois",tr:"bazen",ex:"Je prends parfois le bus.",exTr:"Bazen otobüse biniyorum."},
-  {fr:"la semaine prochaine",tr:"gelecek hafta",ex:"On se voit la semaine prochaine?",exTr:"Gelecek hafta görüşelim mi?"},
-  {fr:"le week-end",tr:"hafta sonu",ex:"Que fais-tu ce week-end?",exTr:"Bu hafta sonu ne yapıyorsun?"},
-  {fr:"souvent",tr:"sık sık",ex:"Elle va souvent au cinéma.",exTr:"Sinemaya sık sık gidiyor."},
-  {fr:"à gauche",tr:"sola",ex:"Tournez à gauche au carrefour.",exTr:"Kavşakta sola dönün."},
-  {fr:"à droite",tr:"sağa",ex:"La banque est à droite.",exTr:"Banka sağda."},
-  {fr:"tout droit",tr:"düz devam et",ex:"Continuez tout droit pendant cent mètres.",exTr:"Yüz metre düz devam edin."},
-  {fr:"l'arrêt de bus",tr:"otobüs durağı",ex:"L'arrêt de bus est au coin de la rue.",exTr:"Otobüs durağı köşede."},
-  {fr:"le guichet",tr:"gişe / vezne",ex:"Achetez votre billet au guichet.",exTr:"Biletinizi gişeden alın."},
-  {fr:"avoir faim",tr:"aç olmak",ex:"J'ai très faim, allons manger!",exTr:"Çok acıktım, gidip yiyelim!"},
-  {fr:"pressé(e)",tr:"acelesi var / acelem var",ex:"Je suis pressé, à plus tard!",exTr:"Acelemvar, sonra görüşürüz!"},
-  {fr:"perdu(e)",tr:"kayboldum",ex:"Je suis perdu, pouvez-vous m'aider?",exTr:"Kayboldum, yardım edebilir misiniz?"},
-  {fr:"content(e)",tr:"mutlu / memnun",ex:"Je suis très content de te voir.",exTr:"Seni görmekten çok memnunum."},
-  {fr:"ça m'est égal",tr:"farketmez / önemli değil",ex:"Thé ou café? Ça m'est égal.",exTr:"Çay mı kahve mi? Farketmez."}
+// ══════════════════════════════════════════
+// FLASHCARD DATA
+// ══════════════════════════════════════════
+const CARDS=[
+  {fr:"le marché",tr:"pazar",ex:"Je vais au marché le dimanche.",exTr:"Pazar günleri pazara gidiyorum.",
+   detail:{anlam:"Açık hava pazarı ya da genel olarak piyasa anlamına gelir. Fransa'da her mahallenin haftalık 'marché'si vardır.",gramer:"Eril isim (masculin). 'Le' artikel alır. Çoğul: les marchés.",gunluk:"Valence'ta her hafta kurulan pazarlarda sebze, meyve, peynir alırken kullanırsın. 'Je vais au marché' diyerek konuşmaya başlayabilirsin.",cumleler:[{z:"Şimdiki",fr:"Je vais au marché.",tr:"Pazara gidiyorum."},{z:"Geçmiş",fr:"Je suis allé au marché hier.",tr:"Dün pazara gittim."},{z:"Gelecek",fr:"J'irai au marché demain.",tr:"Yarın pazara gideceğim."},{z:"Soru",fr:"Tu vas au marché ce matin?",tr:"Bu sabah pazara gidiyor musun?"}]}},
+  {fr:"la boulangerie",tr:"fırın / ekmekçi",ex:"La boulangerie ouvre à sept heures.",exTr:"Fırın saat yedide açılıyor.",
+   detail:{anlam:"Ekmek ve pasta satan fırın. Fransa'nın sembolü sayılır, her köşe başında bir boulangerie bulunur.",gramer:"Dişil isim (féminin). 'La' artikel alır. Çoğul: les boulangeries.",gunluk:"Sabahları 'une baguette, s'il vous plaît' diyerek ekmek alırsın. Valence'taki boulangerie'lere her gün uğrayabilirsin.",cumleler:[{z:"Şimdiki",fr:"La boulangerie est ouverte.",tr:"Fırın açık."},{z:"Geçmiş",fr:"J'ai acheté du pain à la boulangerie.",tr:"Fırından ekmek aldım."},{z:"Gelecek",fr:"Je passerai à la boulangerie.",tr:"Fırına uğrayacağım."},{z:"Soru",fr:"La boulangerie est ouverte le dimanche?",tr:"Fırın pazar günü açık mı?"}]}},
+  {fr:"la mairie",tr:"belediye",ex:"Je dois aller à la mairie demain.",exTr:"Yarın belediyeye gitmem gerekiyor.",
+   detail:{anlam:"Belediye binası. Fransa'da tüm resmi işlemler burada yapılır: kayıt, belgeler, evlilik vb.",gramer:"Dişil isim (féminin). 'La' artikel alır.",gunluk:"Oturma izni, adres kaydı gibi resmi işlemler için kullanırsın. 'Je dois aller à la mairie' çok işe yarar bir cümle.",cumleler:[{z:"Şimdiki",fr:"Je vais à la mairie pour un document.",tr:"Belge için belediyeye gidiyorum."},{z:"Geçmiş",fr:"Je suis allé à la mairie ce matin.",tr:"Bu sabah belediyeye gittim."},{z:"Gelecek",fr:"Je dois aller à la mairie la semaine prochaine.",tr:"Gelecek hafta belediyeye gitmem gerekecek."},{z:"Soru",fr:"La mairie est ouverte aujourd'hui?",tr:"Belediye bugün açık mı?"}]}},
+  {fr:"l'épicerie",tr:"bakkal",ex:"Il achète du lait à l'épicerie.",exTr:"Bakkaldansüt alıyor.",
+   detail:{anlam:"Küçük bakkal dükkanı. Marketlerden farklı olarak mahalle bakkaliyeleridir.",gramer:"Dişil isim (féminin). Sesli harfle başladığı için 'l'' artikel alır. Tam hali: la épicerie.",gunluk:"Küçük alışverişler için, özellikle geç saatlerde açık olan bakkallarda kullanırsın.",cumleler:[{z:"Şimdiki",fr:"Je vais à l'épicerie acheter du pain.",tr:"Ekmek almak için bakkala gidiyorum."},{z:"Geçmiş",fr:"J'ai acheté des œufs à l'épicerie.",tr:"Bakkaldanyumurta aldım."},{z:"Gelecek",fr:"Je passerai à l'épicerie ce soir.",tr:"Bu akşam bakkala uğrayacağım."},{z:"Soru",fr:"L'épicerie est encore ouverte?",tr:"Bakkal hâlâ açık mı?"}]}},
+  {fr:"le trottoir",tr:"kaldırım",ex:"Marche sur le trottoir.",exTr:"Kaldırımda yürü.",
+   detail:{anlam:"Yaya kaldırımı. Araçların geçtiği yolun kenarındaki yaya bölgesi.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Birini uyarırken ya da yön tarif ederken kullanırsın.",cumleler:[{z:"Şimdiki",fr:"Je marche sur le trottoir.",tr:"Kaldırımda yürüyorum."},{z:"Geçmiş",fr:"J'ai attendu sur le trottoir.",tr:"Kaldırımda bekledim."},{z:"Gelecek",fr:"Attends-moi sur le trottoir.",tr:"Kaldırımda beni bekle."},{z:"Soru",fr:"Le trottoir est glissant?",tr:"Kaldırım kaygan mı?"}]}},
+  {fr:"l'addition",tr:"hesap (restoranda)",ex:"L'addition, s'il vous plaît!",exTr:"Hesabı getirir misiniz!",
+   detail:{anlam:"Restoranda ya da kafede yemek/içecek sonrası istenen hesap.",gramer:"Dişil isim (féminin). Sesli harfle başladığından 'l'' alır.",gunluk:"Restorandan çıkarken tek başına 'L'addition, s'il vous plaît!' diyebilirsin, çok doğal gelir.",cumleler:[{z:"Şimdiki",fr:"Je demande l'addition.",tr:"Hesabı istiyorum."},{z:"Geçmiş",fr:"J'ai payé l'addition.",tr:"Hesabı ödedim."},{z:"Gelecek",fr:"Je vais demander l'addition.",tr:"Hesabı isteyeceğim."},{z:"Soru",fr:"On peut avoir l'addition?",tr:"Hesabı alabilir miyiz?"}]}},
+  {fr:"le voisin / la voisine",tr:"komşu",ex:"Mon voisin est très sympa.",exTr:"Komşum çok sempatik.",
+   detail:{anlam:"Komşu. Erkek komşu: voisin, kadın komşu: voisine.",gramer:"Eril/dişil ikisi de var. 'Mon voisin' (erkek), 'ma voisine' (kadın).",gunluk:"Komşunla tanışırken 'Je suis votre nouveau voisin' (Yeni komşunuzum) diyebilirsin.",cumleler:[{z:"Şimdiki",fr:"Mon voisin fait du bruit.",tr:"Komşum gürültü yapıyor."},{z:"Geçmiş",fr:"J'ai parlé à ma voisine hier.",tr:"Dün komşumla konuştum."},{z:"Gelecek",fr:"Je vais rencontrer mes voisins.",tr:"Komşularımla tanışacağım."},{z:"Soru",fr:"Vous connaissez votre voisin?",tr:"Komşunuzu tanıyor musunuz?"}]}},
+  {fr:"excusez-moi",tr:"affedersiniz",ex:"Excusez-moi, où est la gare?",exTr:"Affedersiniz, istasyon nerede?",
+   detail:{anlam:"Resmi 'affedersiniz'. Birinin dikkatini çekmek ya da özür dilemek için kullanılır.",gramer:"Fiil ifadesi. 'Excuser' fiilinden gelir. 'Excuse-moi' daha samimi halidir.",gunluk:"Birinin önünden geçerken, yol sorarken veya yanlışlıkla dokunduğunda kullanırsın. Fransa'da çok kullanılır.",cumleler:[{z:"Çekim",fr:"Excusez-moi, je suis désolé.",tr:"Affedersiniz, özür dilerim."},{z:"Yol sorma",fr:"Excusez-moi, où est la pharmacie?",tr:"Affedersiniz, eczane nerede?"},{z:"Geçerken",fr:"Excusez-moi, je passe.",tr:"Affedersiniz, geçiyorum."},{z:"Dikkat çekme",fr:"Excusez-moi madame!",tr:"Affedersiniz hanımefendi!"}]}},
+  {fr:"je ne comprends pas",tr:"anlamıyorum",ex:"Parlez lentement, je ne comprends pas.",exTr:"Yavaş konuşun, anlamıyorum.",
+   detail:{anlam:"'Anlamıyorum' ifadesi. Fransız biri hızlı konuştuğunda bu cümle hayat kurtarır.",gramer:"Olumsuz cümle yapısı: ne...pas. 'Je comprends' → 'Je ne comprends pas'.",gunluk:"Birisi hızlı ya da anlaşılmaz konuştuğunda hemen söylersin. Utanma, Fransızlar bunu çok anlayışla karşılar.",cumleler:[{z:"Şimdiki",fr:"Je ne comprends pas le français.",tr:"Fransızcayı anlamıyorum."},{z:"Kibarca",fr:"Désolé, je ne comprends pas.",tr:"Özür dilerim, anlamıyorum."},{z:"Yavaş konuşma isteği",fr:"Je ne comprends pas, pouvez-vous répéter?",tr:"Anlamıyorum, tekrar eder misiniz?"},{z:"Soru",fr:"Vous comprenez le turc?",tr:"Türkçe anlıyor musunuz?"}]}},
+  {fr:"pouvez-vous répéter?",tr:"tekrar eder misiniz?",ex:"Pouvez-vous répéter plus lentement?",exTr:"Daha yavaş tekrar eder misiniz?",
+   detail:{anlam:"Kibarca tekrar etmesini istemek. Resmi hitap (vous) kullanılır.",gramer:"Pouvoir fiili (vous formu) + répéter. 'Peux-tu répéter?' daha samimi formu.",gunluk:"Anlamadığında veya net duymadığında çok işe yarar. Ekleyebileceğin: 'plus lentement' (daha yavaş).",cumleler:[{z:"Resmi",fr:"Pouvez-vous répéter s'il vous plaît?",tr:"Tekrar eder misiniz lütfen?"},{z:"Samimi",fr:"Peux-tu répéter?",tr:"Tekrar eder misin?"},{z:"Yavaş",fr:"Pouvez-vous parler plus lentement?",tr:"Daha yavaş konuşabilir misiniz?"},{z:"Yazı",fr:"Pouvez-vous l'écrire?",tr:"Yazabilir misiniz?"}]}},
+  {fr:"bientôt",tr:"yakında",ex:"À bientôt!",exTr:"Yakında görüşürüz!",
+   detail:{anlam:"Yakında, kısa süre içinde. 'À bientôt' kalıbıyla veda ederken çok kullanılır.",gramer:"Zarf (adverbe). Değişmez.",gunluk:"Birinden ayrılırken 'Au revoir' yerine ya da yanında 'À bientôt!' diyebilirsin.",cumleler:[{z:"Veda",fr:"À bientôt!",tr:"Görüşürüz yakında!"},{z:"Umut",fr:"J'espère à bientôt.",tr:"Yakında görüşmek umudundayım."},{z:"Zaman",fr:"On se revoit bientôt.",tr:"Yakında tekrar buluşuruz."},{z:"Soru",fr:"On se voit bientôt?",tr:"Yakında görüşür müyüz?"}]}},
+  {fr:"parfois",tr:"bazen",ex:"Je prends parfois le bus.",exTr:"Bazen otobüse biniyorum.",
+   detail:{anlam:"Bazen, ara sıra. Düzenli olmayan ama zaman zaman olan eylemler için.",gramer:"Zarf (adverbe de fréquence). Fiilden önce ya da sonra gelebilir.",gunluk:"Alışkanlıklarını anlatırken kullanırsın. 'Parfois je cuisine, parfois je mange dehors.'",cumleler:[{z:"Şimdiki",fr:"Je mange parfois seul.",tr:"Bazen yalnız yiyorum."},{z:"Geçmiş",fr:"Parfois, je sortais le soir.",tr:"Bazen akşamları çıkardım."},{z:"Karşılaştırma",fr:"Parfois oui, parfois non.",tr:"Bazen evet, bazen hayır."},{z:"Soru",fr:"Tu fais ça parfois?",tr:"Bunu bazen yapıyor musun?"}]}},
+  {fr:"la semaine prochaine",tr:"gelecek hafta",ex:"On se voit la semaine prochaine?",exTr:"Gelecek hafta görüşelim mi?",
+   detail:{anlam:"Gelecek hafta. Plan yaparken çok kullanılan zaman ifadesi.",gramer:"'La semaine' (dişil) + 'prochaine' (sıfat, dişil uyumu). 'La semaine dernière' = geçen hafta.",gunluk:"Randevu ayarlarken, plan yaparken günlük olarak kullanırsın.",cumleler:[{z:"Plan",fr:"J'ai un rendez-vous la semaine prochaine.",tr:"Gelecek hafta randevum var."},{z:"Soru",fr:"Tu es libre la semaine prochaine?",tr:"Gelecek hafta müsait misin?"},{z:"Öneri",fr:"On pourrait se voir la semaine prochaine.",tr:"Gelecek hafta buluşabiliriz."},{z:"Bilgi",fr:"La semaine prochaine, c'est les vacances.",tr:"Gelecek hafta tatil."}]}},
+  {fr:"le week-end",tr:"hafta sonu",ex:"Que fais-tu ce week-end?",exTr:"Bu hafta sonu ne yapıyorsun?",
+   detail:{anlam:"Hafta sonu (Cumartesi-Pazar). Fransızcaya İngilizceden geçmiş bir kelime.",gramer:"Eril isim (masculin). 'Le week-end' → 'ce week-end' (bu hafta sonu).",gunluk:"Sosyal sohbetlerin vazgeçilmezi. 'Bon week-end!' (İyi hafta sonlar!) veda olarak kullanılır.",cumleler:[{z:"Şimdiki",fr:"Je reste chez moi ce week-end.",tr:"Bu hafta sonu evde kalıyorum."},{z:"Geçmiş",fr:"J'ai bien profité du week-end.",tr:"Hafta sonunu iyi geçirdim."},{z:"Gelecek",fr:"Ce week-end, je vais à Lyon.",tr:"Bu hafta sonu Lyon'a gideceğim."},{z:"Veda",fr:"Bon week-end!",tr:"İyi hafta sonlar!"}]}},
+  {fr:"souvent",tr:"sık sık",ex:"Elle va souvent au cinéma.",exTr:"Sinemaya sık sık gidiyor.",
+   detail:{anlam:"Sık sık, çoğunlukla. Tekrarlanan eylemler için kullanılır.",gramer:"Sıklık zarfı (adverbe de fréquence). Genellikle fiilden sonra gelir.",gunluk:"Alışkanlıklarını anlatırken. 'Je mange souvent des pâtes.' (Sık sık makarna yerim.)",cumleler:[{z:"Şimdiki",fr:"Je vais souvent au marché.",tr:"Sık sık pazara gidiyorum."},{z:"Geçmiş",fr:"Avant, je sortais souvent.",tr:"Eskiden sık sık çıkardım."},{z:"Karşılaştırma",fr:"Tu viens souvent ici?",tr:"Buraya sık sık gelir misin?"},{z:"Olumsuz",fr:"Je ne sors pas souvent.",tr:"Çok sık çıkmam."}]}},
+  {fr:"à gauche",tr:"sola",ex:"Tournez à gauche au carrefour.",exTr:"Kavşakta sola dönün.",
+   detail:{anlam:"Sola, sol tarafa. Yön tarifi verirken en çok kullanılan ifadelerden biri.",gramer:"Edat grubu. 'À droite' (sağa) ile zıt. 'Sur votre gauche' = solunuzda.",gunluk:"Yol tarifi verirken veya alırken mutlaka lazım. 'C'est à gauche' (Solda).",cumleler:[{z:"Tarif",fr:"Tournez à gauche.",tr:"Sola dönün."},{z:"Konum",fr:"La pharmacie est à gauche.",tr:"Eczane solda."},{z:"Yürüyerek",fr:"Allez tout droit, puis à gauche.",tr:"Düz gidin, sonra sola."},{z:"Soru",fr:"C'est à gauche ou à droite?",tr:"Solda mı yoksa sağda mı?"}]}},
+  {fr:"à droite",tr:"sağa",ex:"La banque est à droite.",exTr:"Banka sağda.",
+   detail:{anlam:"Sağa, sağ tarafa. Yön tarifi için temel ifade.",gramer:"Edat grubu. 'À gauche' ile zıt. 'Sur votre droite' = sağınızda.",gunluk:"Yol tarifleri için 'à gauche' ile birlikte öğrenmek şart.",cumleler:[{z:"Tarif",fr:"Tournez à droite.",tr:"Sağa dönün."},{z:"Konum",fr:"Le café est à droite.",tr:"Kafe sağda."},{z:"Mesafe",fr:"C'est à droite, après le feu.",tr:"Trafik ışığından sonra sağda."},{z:"Soru",fr:"Je tourne à droite ici?",tr:"Burada sağa mı dönüyorum?"}]}},
+  {fr:"tout droit",tr:"düz devam et",ex:"Continuez tout droit.",exTr:"Düz devam edin.",
+   detail:{anlam:"Dümdüz, doğruca devam etmek. Yol tarifi için çok temel.",gramer:"Zarf grubu. 'Tout' burada 'tamamen, dümdüz' anlamında pekiştirme yapar.",gunluk:"Yol tarifi alırken en çok duyacağın ifade. 'Allez tout droit' = Düz gidin.",cumleler:[{z:"Tarif",fr:"Allez tout droit.",tr:"Düz gidin."},{z:"Mesafe",fr:"Tout droit pendant 200 mètres.",tr:"200 metre düz gidin."},{z:"Sonra",fr:"Tout droit, puis à gauche.",tr:"Düz gidin, sonra sola."},{z:"Soru",fr:"Je continue tout droit?",tr:"Düz devam mı ediyorum?"}]}},
+  {fr:"l'arrêt de bus",tr:"otobüs durağı",ex:"L'arrêt de bus est au coin.",exTr:"Otobüs durağı köşede.",
+   detail:{anlam:"Otobüs durağı. Toplu taşıma kullanırken şart olan kelime.",gramer:"Eril isim. 'L'arrêt' (durak) + 'de bus' (otobüs). Çoğul: les arrêts de bus.",gunluk:"Valence'ta otobüs kullanmak için mutlaka lazım. Durak sormak için: 'Où est l'arrêt de bus?'",cumleler:[{z:"Konum",fr:"L'arrêt de bus est là-bas.",tr:"Otobüs durağı orada."},{z:"Bekleme",fr:"J'attends à l'arrêt de bus.",tr:"Otobüs durağında bekliyorum."},{z:"Soru",fr:"Où est l'arrêt de bus pour le centre?",tr:"Merkeze giden otobüs durağı nerede?"},{z:"Bilgi",fr:"Le bus arrive dans 5 minutes.",tr:"Otobüs 5 dakikada geliyor."}]}},
+  {fr:"le guichet",tr:"gişe / vezne",ex:"Achetez votre billet au guichet.",exTr:"Biletinizi gişeden alın.",
+   detail:{anlam:"Gişe ya da vezne. İstasyon, tiyatro, banka gibi yerlerde hizmet penceresi.",gramer:"Eril isim (masculin). 'Le guichet automatique' = ATM.",gunluk:"Tren bileti alırken, bankada işlem yaparken kullanırsın.",cumleler:[{z:"Şimdiki",fr:"Je vais au guichet.",tr:"Gişeye gidiyorum."},{z:"Satın alma",fr:"J'achète mon billet au guichet.",tr:"Biletimi gişeden alıyorum."},{z:"Soru",fr:"Le guichet est ouvert?",tr:"Gişe açık mı?"},{z:"ATM",fr:"Je cherche un guichet automatique.",tr:"ATM arıyorum."}]}},
+  {fr:"avoir faim",tr:"aç olmak",ex:"J'ai très faim!",exTr:"Çok acıktım!",
+   detail:{anlam:"Aç olmak. Fransızcada 'avoir' (sahip olmak) fiiliyle kullanılır, 'être' ile değil.",gramer:"'Avoir' fiili + 'faim'. J'ai faim / Tu as faim / Il a faim. 'Avoir soif' = susamak.",gunluk:"Yemek vaktinde, kafede, markette. 'J'ai faim, on mange?' (Acıktım, yiyelim mi?)",cumleler:[{z:"Şimdiki",fr:"J'ai très faim.",tr:"Çok acıktım."},{z:"Soru",fr:"Tu as faim?",tr:"Acıktın mı?"},{z:"Öneri",fr:"J'ai faim, on va manger?",tr:"Acıktım, yemeye gidelim mi?"},{z:"Olumsuz",fr:"Je n'ai pas faim, merci.",tr:"Aç değilim, teşekkürler."}]}},
+  {fr:"pressé(e)",tr:"acelesı var / acelem var",ex:"Je suis pressé, à plus tard!",exTr:"Acelemvar, sonra görüşürüz!",
+   detail:{anlam:"Acelesi olmak, vakti dar olmak. 'Je suis pressé' = acelemvar.",gramer:"Sıfat. Erkek: pressé, kadın: pressée. 'Être pressé' fiili ile kullanılır.",gunluk:"Birini durdurduğunda ya da ayrılmak zorunda kaldığında kullanırsın.",cumleler:[{z:"Şimdiki",fr:"Je suis pressé, désolé.",tr:"Acelemvar, özür dilerim."},{z:"Soru",fr:"Tu es pressé?",tr:"Acelen mi var?"},{z:"Açıklama",fr:"Je suis pressé, j'ai un rendez-vous.",tr:"Acelemvar, randevum var."},{z:"Kibar",fr:"Excusez-moi, je suis un peu pressé.",tr:"Affedersiniz, biraz acelem var."}]}},
+  {fr:"perdu(e)",tr:"kayboldum",ex:"Je suis perdu, pouvez-vous m'aider?",exTr:"Kayboldum, yardım eder misiniz?",
+   detail:{anlam:"Kaybolmak. 'Je suis perdu' = kayboldum. Yeni bir şehirde çok işe yarar.",gramer:"Sıfat/participe passé. Erkek: perdu, kadın: perdue. 'Être perdu' ile kullanılır.",gunluk:"Valence'ta yeni olduğun için bu cümleyi bilmek çok önemli. Utanma, herkes yardım eder.",cumleler:[{z:"Şimdiki",fr:"Je suis perdu.",tr:"Kayboldum."},{z:"Yardım",fr:"Je suis perdu, pouvez-vous m'aider?",tr:"Kayboldum, yardım eder misiniz?"},{z:"Konum",fr:"Je ne sais pas où je suis.",tr:"Nerede olduğumu bilmiyorum."},{z:"Harita",fr:"Pouvez-vous me montrer sur la carte?",tr:"Haritada gösterebilir misiniz?"}]}},
+  {fr:"content(e)",tr:"mutlu / memnun",ex:"Je suis très content de te voir.",exTr:"Seni görmekten çok memnunum.",
+   detail:{anlam:"Mutlu, memnun, hoşnut. 'Je suis content' = mutluyum / memnunum.",gramer:"Sıfat. Erkek: content, kadın: contente. 'Être content(e) de...' + fiil mastarı.",gunluk:"Birileriyle tanışınca 'Je suis content de vous connaître' (Sizi tanımaktan memnunum) diyebilirsin.",cumleler:[{z:"Şimdiki",fr:"Je suis très content.",tr:"Çok mutluyum."},{z:"Tanışma",fr:"Je suis content de vous rencontrer.",tr:"Sizinle tanışmaktan memnunum."},{z:"Haber",fr:"Je suis content d'apprendre ça.",tr:"Bunu öğrenmekten memnunum."},{z:"Soru",fr:"Tu es content ici?",tr:"Burada mutlu musun?"}]}},
+  {fr:"ça m'est égal",tr:"farketmez / önemli değil",ex:"Thé ou café? Ça m'est égal.",exTr:"Çay mı kahve mi? Farketmez.",
+   detail:{anlam:"Farketmez, önemli değil, her şey aynı benim için. Tercih fark etmediğinde kullanılır.",gramer:"'Ça' (bu) + 'm'est' (bana) + 'égal' (eşit/fark etmez). Kalıp ifade.",gunluk:"Birileri sana seçenek sunduğunda nazikçe 'fark etmez' demek için. Hafif vurdumduymazlık da içerebilir.",cumleler:[{z:"Tercih",fr:"Ça m'est égal, choisis toi.",tr:"Farketmez, sen seç."},{z:"Restoran",fr:"Pizza ou pâtes? Ça m'est égal.",tr:"Pizza mı makarna mı? Farketmez."},{z:"Güçlü",fr:"Vraiment, ça m'est complètement égal.",tr:"Gerçekten, hiç fark etmez."},{z:"Soru",fr:"Tu as une préférence? — Ça m'est égal.",tr:"Bir tercihin var mı? — Farketmez."}]}}
 ];
 
-let deck=[], cur=0, flipped=false, knew=0, didnt=[], mode='today', noteIdx=-1;
+// ══════════════════════════════════════════
+// GRAMMAR DATA — A1 Grammaire Progressive
+// ══════════════════════════════════════════
+const GRAMMAR=[
+  {
+    id:0, title:"Être — 'Olmak' Fiili", subtitle:"Présent tense · Temel",
+    cards:[
+      {front:{title:"ÊTRE — Geniş Zaman",body:"Fransızcanın en temel fiili.<br><br><strong>Je suis</strong> — Ben(im)<br><strong>Tu es</strong> — Sen(sin)<br><strong>Il / Elle est</strong> — O<br><strong>Nous sommes</strong> — Biz(iz)<br><strong>Vous êtes</strong> — Siz(siniz)<br><strong>Ils / Elles sont</strong> — Onlar",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je suis étudiant.",tr:"Ben öğrenciyim."},{fr:"Tu es français?",tr:"Sen Fransız mısın?"},{fr:"Il est médecin.",tr:"O doktor."},{fr:"Nous sommes à Valence.",tr:"Biz Valence'tayız."}]}},
+      {front:{title:"ÊTRE — Olumsuz Yapı",body:"Olumsuz yapmak için: <em>ne...pas</em><br><br><strong>Je ne suis pas</strong> = değilim<br><strong>Tu n'es pas</strong> = değilsin<br><strong>Il n'est pas</strong> = değil<br><br>💡 Sesli harf önünde 'ne' → 'n'",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je ne suis pas français.",tr:"Ben Fransız değilim."},{fr:"Il n'est pas là.",tr:"O burada değil."},{fr:"Nous ne sommes pas perdus.",tr:"Kaybolmadık."},{fr:"Ce n'est pas vrai.",tr:"Bu doğru değil."}]}},
+      {front:{title:"ÊTRE — Soru Cümlesi",body:"3 farklı soru yapısı:<br><br><em>1.</em> <strong>Tu es français?</strong> (ton yükseltme)<br><em>2.</em> <strong>Est-ce que tu es français?</strong><br><em>3.</em> <strong>Es-tu français?</strong> (resmi)<br><br>💡 Günlük hayatta 1. ve 2. kullanılır.",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Tu es libre ce soir?",tr:"Bu akşam müsait misin?"},{fr:"Est-ce qu'il est là?",tr:"O orada mı?"},{fr:"Vous êtes d'où?",tr:"Nerelisiniz?"},{fr:"C'est loin?",tr:"Uzak mı?"}]}}
+    ]
+  },
+  {
+    id:1, title:"Avoir — 'Sahip Olmak' Fiili", subtitle:"Présent tense · Temel",
+    cards:[
+      {front:{title:"AVOIR — Geniş Zaman",body:"İkinci en temel fiil. Sahip olmak + deyimler.<br><br><strong>J'ai</strong> — Benim var<br><strong>Tu as</strong> — Senin var<br><strong>Il / Elle a</strong> — Onun var<br><strong>Nous avons</strong> — Bizim var<br><strong>Vous avez</strong> — Sizin var<br><strong>Ils / Elles ont</strong> — Onların var",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"J'ai un appartement.",tr:"Bir dairem var."},{fr:"Tu as du temps?",tr:"Vaktin var mı?"},{fr:"Il a faim.",tr:"Acıktı."},{fr:"Nous avons un problème.",tr:"Bir sorunumuz var."}]}},
+      {front:{title:"AVOIR — Özel Deyimler",body:"'Avoir' fiili Fransızcada duygu ve bedensel hisleri anlatır:<br><br><em>Avoir faim</em> = acıkmak<br><em>Avoir soif</em> = susamak<br><em>Avoir chaud</em> = sıcak olmak<br><em>Avoir froid</em> = üşümek<br><em>Avoir peur</em> = korkmak<br><em>Avoir raison</em> = haklı olmak",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"J'ai très faim!",tr:"Çok acıktım!"},{fr:"Tu as froid?",tr:"Üşüyor musun?"},{fr:"Il a raison.",tr:"Haklı."},{fr:"J'ai peur.",tr:"Korkuyorum."}]}},
+      {front:{title:"AVOIR — Yaş İfadesi",body:"Fransızcada yaş <em>avoir</em> ile sorulur, <em>être</em> ile değil!<br><br><strong>Quel âge as-tu?</strong><br>= Kaç yaşındasın?<br><br><strong>J'ai ___ ans.</strong><br>= ___ yaşındayım.<br><br>💡 Türkçeyle tam zıt: 'sahip olmak' kullanılır.",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"J'ai trente ans.",tr:"Otuz yaşındayım."},{fr:"Quel âge avez-vous?",tr:"Kaç yaşındasınız?"},{fr:"Il a vingt-cinq ans.",tr:"Yirmi beş yaşında."},{fr:"Tu as quel âge?",tr:"Kaç yaşındasın?"}]}}
+    ]
+  },
+  {
+    id:2, title:"Articles — Artikeller", subtitle:"le, la, l', les, un, une, des",
+    cards:[
+      {front:{title:"Belirli Artikel — Défini",body:"Türkçedeki 'bu/o/the' gibi. Bilinen şeyler için.<br><br><strong>le</strong> → eril tekil: <em>le pain</em> (ekmek)<br><strong>la</strong> → dişil tekil: <em>la maison</em> (ev)<br><strong>l'</strong> → sesli harf önü: <em>l'eau</em> (su)<br><strong>les</strong> → çoğul: <em>les enfants</em> (çocuklar)<br><br>💡 Her ismin cinsiyetini ezberle!",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Le café est chaud.",tr:"Kahve sıcak."},{fr:"La boulangerie est fermée.",tr:"Fırın kapalı."},{fr:"L'addition, s'il vous plaît.",tr:"Hesabı, lütfen."},{fr:"Les enfants jouent.",tr:"Çocuklar oynuyor."}]}},
+      {front:{title:"Belirsiz Artikel — Indéfini",body:"Türkçedeki 'bir' gibi. İlk kez bahsedilen şeyler.<br><br><strong>un</strong> → eril tekil: <em>un café</em> (bir kahve)<br><strong>une</strong> → dişil tekil: <em>une baguette</em> (bir baget)<br><strong>des</strong> → çoğul: <em>des croissants</em> (kruvasanlar)<br><br>💡 Olumsuzda hepsi <em>de/d'</em> olur!",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je voudrais un café.",tr:"Bir kahve istiyorum."},{fr:"J'ai une question.",tr:"Bir sorum var."},{fr:"Il y a des gens ici.",tr:"Burada insanlar var."},{fr:"Je n'ai pas de voiture.",tr:"Arabam yok."}]}},
+      {front:{title:"Artikel — Olumsuzda Değişim",body:"Olumsuz cümlede <em>un, une, des</em> → <em>de/d'</em> olur:<br><br>J'ai <strong>un</strong> chien. ✓<br>Je n'ai pas <strong>de</strong> chien. ✓<br><br>J'ai <strong>des</strong> amis. ✓<br>Je n'ai pas <strong>d'</strong> amis. ✓<br><br>💡 Ama belirli artikel değişmez: Je n'aime pas <strong>le</strong> café.",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je n'ai pas de voiture.",tr:"Arabam yok."},{fr:"Il n'y a pas de pain.",tr:"Ekmek yok."},{fr:"Je n'ai pas d'argent.",tr:"Param yok."},{fr:"Il n'a pas de frères.",tr:"Erkek kardeşi yok."}]}}
+    ]
+  },
+  {
+    id:3, title:"Negatif — Olumsuz Cümleler", subtitle:"ne...pas yapısı",
+    cards:[
+      {front:{title:"OLUMSUZ — Temel Yapı",body:"Fransızcada olumsuz yapmak için fiili iki taraftan kapat:<br><br><em>Özne + <strong>ne</strong> + fiil + <strong>pas</strong></em><br><br>Je parle → Je <strong>ne</strong> parle <strong>pas</strong><br>Tu viens → Tu <strong>ne</strong> viens <strong>pas</strong><br><br>💡 Sesli harf önünde 'ne' → 'n'<br>Je n'aime pas / Il n'est pas",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je ne parle pas anglais.",tr:"İngilizce konuşmam."},{fr:"Il ne vient pas aujourd'hui.",tr:"Bugün gelmiyor."},{fr:"Je n'aime pas le café.",tr:"Kahve sevmem."},{fr:"Nous ne sommes pas pressés.",tr:"Acelemiz yok."}]}},
+      {front:{title:"OLUMSUZ — Diğer Yapılar",body:"<em>ne...pas</em> dışında başka olumsuzlar:<br><br><strong>ne...jamais</strong> = hiçbir zaman<br><strong>ne...plus</strong> = artık ...değil<br><strong>ne...rien</strong> = hiçbir şey<br><strong>ne...personne</strong> = hiç kimse<br><br>💡 Hepsi aynı yapıda: ne + fiil + olumsuz kelime",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je ne fume jamais.",tr:"Hiç sigara içmem."},{fr:"Je ne travaille plus ici.",tr:"Artık burada çalışmıyorum."},{fr:"Je ne vois rien.",tr:"Hiçbir şey görmüyorum."},{fr:"Il n'y a personne.",tr:"Hiç kimse yok."}]}}
+    ]
+  },
+  {
+    id:4, title:"Présent — Düzenli Fiiller", subtitle:"-er, -ir, -re fiilleri",
+    cards:[
+      {front:{title:"-ER Fiilleri — En Yaygın Grup",body:"Fransızca fiillerin %90'ı -er'dir.<br><br><em>PARLER</em> (konuşmak):<br>Je parl<strong>e</strong> · Tu parl<strong>es</strong><br>Il parl<strong>e</strong> · Nous parl<strong>ons</strong><br>Vous parl<strong>ez</strong> · Ils parl<strong>ent</strong><br><br>💡 Aynı kural: manger, habiter, travailler, aimer...",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je parle un peu français.",tr:"Biraz Fransızca konuşuyorum."},{fr:"Tu habites où?",tr:"Nerede oturuyorsun?"},{fr:"Il travaille à Lyon.",tr:"Lyon'da çalışıyor."},{fr:"Nous mangeons ensemble.",tr:"Birlikte yiyoruz."}]}},
+      {front:{title:"-IR Fiilleri",body:"İkinci büyük fiil grubu.<br><br><em>FINIR</em> (bitirmek):<br>Je fin<strong>is</strong> · Tu fin<strong>is</strong><br>Il fin<strong>it</strong> · Nous fin<strong>issons</strong><br>Vous fin<strong>issez</strong> · Ils fin<strong>issent</strong><br><br>💡 Diğer -ir fiilleri: choisir, réussir, grandir...",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je finis mon travail.",tr:"İşimi bitiriyorum."},{fr:"Tu choisis quoi?",tr:"Ne seçiyorsun?"},{fr:"Il réussit toujours.",tr:"Hep başarıyor."},{fr:"Nous finissons à 18h.",tr:"18'de bitiriyoruz."}]}},
+      {front:{title:"ALLER — 'Gitmek' (Düzensiz)",body:"Günlük hayatın en çok kullanılan fiili!<br><br>Je <strong>vais</strong> · Tu <strong>vas</strong><br>Il <strong>va</strong> · Nous <strong>allons</strong><br>Vous <strong>allez</strong> · Ils <strong>vont</strong><br><br>💡 'Aller + infinitif' = yakın gelecek<br><em>Je vais manger</em> = Yemek yiyeceğim",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je vais au marché.",tr:"Pazara gidiyorum."},{fr:"Tu vas bien?",tr:"İyi misin?"},{fr:"Il va pleuvoir.",tr:"Yağmur yağacak."},{fr:"On y va!",tr:"Gidiyoruz!"}]}}
+    ]
+  },
+  {
+    id:5, title:"Pronoms — Zamirler", subtitle:"je, tu, il/elle, nous, vous, ils/elles",
+    cards:[
+      {front:{title:"KİŞİ ZAMİRLERİ — Sujet",body:"Fransızca zamirler fiilden önce gelir ve atlanamaz!<br><br><strong>je</strong> = ben (küçük harf!)<br><strong>tu</strong> = sen (samimi)<br><strong>il</strong> = o (erkek) · <strong>elle</strong> = o (kadın)<br><strong>nous</strong> = biz<br><strong>vous</strong> = siz / saygılı 'sen'<br><strong>ils/elles</strong> = onlar",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je m'appelle Volka.",tr:"Benim adım Volka."},{fr:"Tu viens d'où?",tr:"Nerelisin?"},{fr:"Elle est très sympa.",tr:"O çok sempatik."},{fr:"Vous parlez français?",tr:"Fransızca konuşuyor musunuz?"}]}},
+      {front:{title:"VOUS vs TU — Ne Zaman?",body:"Bu seçim çok önemli!<br><br><strong>TU</strong> → arkadaş, aile, çocuk, akran<br><strong>VOUS</strong> → yabancı, yaşlı, yetkili, resmi ortam<br><br>💡 Emin değilsen VOUS kullan, kibar kalırsın.<br>Karşı taraf 'tutoie-moi' (bana tu de) derse geçersin.",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Tu veux un café? (arkadaşa)",tr:"Kahve ister misin?"},{fr:"Vous désirez? (resmi/müşteriye)",tr:"Ne arzu edersiniz?"},{fr:"Comment tu t'appelles?",tr:"Adın ne? (samimi)"},{fr:"Comment vous appelez-vous?",tr:"Adınız ne? (resmi)"}]}}
+    ]
+  },
+  {
+    id:6, title:"Possession — Sahiplik Sıfatları", subtitle:"mon, ma, mes / ton, ta, tes...",
+    cards:[
+      {front:{title:"BENİM — MON / MA / MES",body:"İsmin cinsiyetine göre değişir:<br><br><strong>mon</strong> + eril isim: <em>mon ami</em><br><strong>ma</strong> + dişil isim: <em>ma maison</em><br><strong>mes</strong> + çoğul: <em>mes enfants</em><br><br>⚠️ İstisna: Sesli harfle başlayan dişil isimler<br><strong>mon</strong> amie (ma değil!)",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Mon appartement est petit.",tr:"Dairem küçük."},{fr:"Ma voisine est sympa.",tr:"Komşum sempatik."},{fr:"Mes clés sont ici.",tr:"Anahtarlarım burada."},{fr:"Mon école est loin.",tr:"Okulum uzak."}]}},
+      {front:{title:"SENİN / SİZİN / ONUN",body:"<strong>ton / ta / tes</strong> = senin<br><strong>votre / vos</strong> = sizin<br><strong>son / sa / ses</strong> = onun<br><br><em>ton ami</em> = senin arkadaşın<br><em>votre passeport</em> = sizin pasaportunuz<br><em>son travail</em> = onun işi<br><br>💡 'son/sa/ses' hem erkek hem kadın için!",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Ton café est froid.",tr:"Kahven soğuk."},{fr:"Votre passeport, s'il vous plaît.",tr:"Pasaportunuz, lütfen."},{fr:"Son appartement est grand.",tr:"Onun dairesi büyük."},{fr:"Ses enfants sont adorables.",tr:"Çocukları çok sevimli."}]}}
+    ]
+  },
+  {
+    id:7, title:"Questions — Soru Cümleleri", subtitle:"comment, où, quand, qui, quoi, combien",
+    cards:[
+      {front:{title:"SORU KELİMELERİ",body:"<strong>Comment?</strong> = Nasıl?<br><strong>Où?</strong> = Nerede / Nereye?<br><strong>Quand?</strong> = Ne zaman?<br><strong>Qui?</strong> = Kim?<br><strong>Quoi / Que?</strong> = Ne?<br><strong>Combien?</strong> = Ne kadar / Kaç?<br><strong>Pourquoi?</strong> = Neden?<br><strong>Quel/Quelle?</strong> = Hangi?",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Où est la pharmacie?",tr:"Eczane nerede?"},{fr:"C'est combien?",tr:"Bu kaç para?"},{fr:"Quand arrives-tu?",tr:"Ne zaman geliyorsun?"},{fr:"Pourquoi tu ris?",tr:"Neden gülüyorsun?"}]}},
+      {front:{title:"EST-CE QUE — Soru Yapısı",body:"'Est-ce que' ile her cümleyi soruya çevirebilirsin:<br><br><em>Est-ce que + normal cümle?</em><br><br>Tu parles français.<br>→ <strong>Est-ce que</strong> tu parles français?<br><br>💡 Günlük konuşmada en kolay soru yapısı!<br>'Est-ce qu'' (sesli harf önünde)",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Est-ce que vous parlez anglais?",tr:"İngilizce konuşuyor musunuz?"},{fr:"Est-ce qu'il y a un médecin?",tr:"Bir doktor var mı?"},{fr:"Est-ce que c'est loin?",tr:"Uzak mı?"},{fr:"Est-ce que tu es libre?",tr:"Müsait misin?"}]}}
+    ]
+  },
+  {
+    id:8, title:"Prépositions — Edatlar", subtitle:"à, de, en, dans, sur, avec...",
+    cards:[
+      {front:{title:"À ve DE — En Temel Edatlar",body:"<strong>À</strong> = -de/-da/-e/-a (konum/yön)<br><em>Je suis à Paris. / Je vais à Lyon.</em><br><br><strong>DE</strong> = -den/-dan (kaynak/sahiplik)<br><em>Je viens de Turquie. / Le café de Marie.</em><br><br>⚠️ Birleşimler:<br><em>à + le = <strong>au</strong></em> (au marché)<br><em>de + le = <strong>du</strong></em> (du pain)",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je vais au supermarché.",tr:"Süpermarkete gidiyorum."},{fr:"Je viens de Turquie.",tr:"Türkiye'den geliyorum."},{fr:"Un verre du vin.",tr:"Bir bardak şarap."},{fr:"Je suis à Valence.",tr:"Valence'dayım."}]}},
+      {front:{title:"EN, DANS, SUR, AVEC",body:"<strong>En</strong> = içinde (ülkeler, ulaşım)<br><em>en France, en bus, en voiture</em><br><br><strong>Dans</strong> = içinde (somut yer)<br><em>dans la rue, dans ma poche</em><br><br><strong>Sur</strong> = üstünde<br><em>sur la table, sur la droite</em><br><br><strong>Avec</strong> = ile birlikte<br><em>avec toi, avec du lait</em>",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Je suis en France.",tr:"Fransa'dayım."},{fr:"Il est dans la voiture.",tr:"Arabadaki."},{fr:"Le café est sur la table.",tr:"Kahve masanın üstünde."},{fr:"Je viens avec toi.",tr:"Seninle geliyorum."}]}}
+    ]
+  },
+  {
+    id:9, title:"Nombres & Heure — Sayılar & Saat", subtitle:"1-100 · Saat sorma ve söyleme",
+    cards:[
+      {front:{title:"SAYILAR — 1 ile 20",body:"<em>1</em> un/une · <em>2</em> deux · <em>3</em> trois<br><em>4</em> quatre · <em>5</em> cinq · <em>6</em> six<br><em>7</em> sept · <em>8</em> huit · <em>9</em> neuf<br><em>10</em> dix · <em>11</em> onze · <em>12</em> douze<br><em>13</em> treize · <em>14</em> quatorze · <em>15</em> quinze<br><em>16</em> seize · <em>17</em> dix-sept<br><em>18</em> dix-huit · <em>19</em> dix-neuf · <em>20</em> vingt",hint:"Kartı çevir → pratik kullanım"},
+       back:{examples:[{fr:"J'ai deux billets.",tr:"İki biletim var."},{fr:"C'est au troisième étage.",tr:"Üçüncü kattaki."},{fr:"Ça coûte quinze euros.",tr:"On beş euro tutuyor."},{fr:"J'habite au numéro vingt.",tr:"Yirmi numarada oturuyorum."}]}},
+      {front:{title:"SAAT — Quelle heure est-il?",body:"<strong>Quelle heure est-il?</strong> = Saat kaç?<br><strong>Il est...</strong> = Saat...<br><br><em>Il est huit heures.</em> = Saat sekiz.<br><em>Il est huit heures et demie.</em> = 8:30<br><em>Il est huit heures et quart.</em> = 8:15<br><em>Il est huit heures moins le quart.</em> = 7:45<br><br>💡 12:00 = <em>midi</em> · 00:00 = <em>minuit</em>",hint:"Kartı çevir → örnekler"},
+       back:{examples:[{fr:"Il est neuf heures du matin.",tr:"Sabah dokuz."},{fr:"On se retrouve à midi.",tr:"Öğleyin buluşalım."},{fr:"Le bus part à dix-huit heures.",tr:"Otobüs 18'de kalkıyor."},{fr:"À quelle heure ouvre la mairie?",tr:"Belediye kaçta açılıyor?"}]}}
+    ]
+  }
+];
 
+// ══════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════
+let deck=[], cur=0, flipped=false, knew=0, didnt=[], noteIdx=-1;
+let grTopicIdx=0, grCardIdx=0, grFlipped=false;
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   if(id==='journal') loadJournal();
+  if(id==='grammar') loadGrammarList();
 }
-function goHome(){ showPage('home'); loadStats(); }
+function goHome(){showPage('home');loadStats()}
 
-// ── STUDY ──
+// ══════════════════════════════════════════
+// FLASHCARD STUDY
+// ══════════════════════════════════════════
 function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
 function startStudy(m){
-  mode=m; flipped=false; knew=0; cur=0;
+  flipped=false;knew=0;cur=0;
   if(m==='today') deck=[...CARDS];
   else if(m==='shuffle') deck=shuffle(CARDS);
-  else{ deck=didnt.length?shuffle(didnt):[...shuffle(CARDS)]; didnt=[]; }
+  else{deck=didnt.length?shuffle(didnt):shuffle(CARDS);didnt=[];}
   document.getElementById('deckTitle').textContent=m==='today'?'Bugünün Destesi':m==='shuffle'?'Karışık Mod':'Zor Kartlar';
-  showPage('study'); loadCard();
+  showPage('study');loadCard();
 }
 function loadCard(){
   if(cur>=deck.length){endStudy();return}
-  const c=deck[cur]; flipped=false;
+  const c=deck[cur];flipped=false;
   document.getElementById('cardInner').classList.remove('flipped');
   document.getElementById('cardWord').textContent=c.fr;
   document.getElementById('cardTr').textContent=c.tr;
   document.getElementById('cardEx').innerHTML=c.ex+'<span>'+c.exTr+'</span>';
   document.getElementById('counter').textContent=(cur+1)+' / '+deck.length;
   document.getElementById('progFill').style.width=(cur/deck.length*100)+'%';
-  const b=document.getElementById('actionBtns');
-  b.style.opacity='0'; b.style.pointerEvents='none';
+  const b=document.getElementById('actionBtns');b.style.opacity='0';b.style.pointerEvents='none';
   document.getElementById('flipHint').style.opacity='1';
 }
 function flipCard(){
@@ -330,17 +571,16 @@ function speak(e){
   window.speechSynthesis.speak(u);
 }
 function answer(k){
-  if(k)knew++;else didnt.push(deck[cur]);
-  cur++;
+  if(k)knew++;else didnt.push(deck[cur]);cur++;
   const s=document.querySelector('.card-scene');
-  s.style.cssText='opacity:0;transform:translateY(10px);transition:all .18s';
-  setTimeout(()=>{loadCard();s.style.cssText='opacity:1;transform:translateY(0);transition:all .18s';},190);
+  s.style.cssText='opacity:0;transform:translateY(8px);transition:all .18s';
+  setTimeout(()=>{loadCard();s.style.cssText='opacity:1;transform:translateY(0);transition:all .18s';},185);
 }
 function endStudy(){
   showPage('done');
   document.getElementById('knewCount').textContent=knew;
   document.getElementById('didntCount').textContent=deck.length-knew;
-  const today=new Date().toDateString(), last=localStorage.getItem('lastDay');
+  const today=new Date().toDateString(),last=localStorage.getItem('lastDay');
   let streak=parseInt(localStorage.getItem('streak')||'0');
   if(last!==today){streak++;localStorage.setItem('streak',streak);localStorage.setItem('lastDay',today);}
   localStorage.setItem('mastered',Math.max(parseInt(localStorage.getItem('mastered')||'0'),knew));
@@ -349,103 +589,193 @@ function endStudy(){
 function loadStats(){
   document.getElementById('streakNum').textContent=localStorage.getItem('streak')||'0';
   document.getElementById('masteredNum').textContent=localStorage.getItem('mastered')||'0';
+  const done=getDoneTopics();
+  document.getElementById('grDoneNum').textContent=done.length;
 }
 
-// ── DETAIL PANEL ──
+// ══════════════════════════════════════════
+// OFFLINE DETAIL PANEL
+// ══════════════════════════════════════════
 function openDetail(){
   const c=deck[cur];
   document.getElementById('dWord').textContent=c.fr;
-  document.getElementById('dBody').innerHTML='<div class="d-loading"><div class="spin">⟳</div><br>Analiz ediliyor...</div>';
+  const d=c.detail;
+  document.getElementById('dBody').innerHTML=`
+    <div class="d-sec"><h4>📖 Anlam & Açıklama</h4><p>${d.anlam}</p></div>
+    <div class="d-sec"><h4>🔤 Gramer</h4><p>${d.gramer}</p></div>
+    <div class="d-sec"><h4>🗣️ Günlük Kullanım</h4><p>${d.gunluk}</p></div>
+    <div class="d-sec"><h4>💬 Farklı Zamanlarda Cümleler</h4>
+      <div class="s-list">${d.cumleler.map(s=>`
+        <div class="s-item">
+          <div class="s-tag">${s.z}</div>
+          <div class="s-fr">${s.fr}</div>
+          <div class="s-tr">${s.tr}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
   document.getElementById('detailPanel').classList.add('open');
-  fetchDetail(c);
 }
 function closeDetail(){document.getElementById('detailPanel').classList.remove('open')}
 
-async function fetchDetail(card){
-  const prompt=`Sen bir Fransızca dil öğretmenisin. Kullanıcı Türkçe konuşuyor, Valence Fransa'da yaşıyor ve Fransızcayı günlük hayatta kullanmak için öğreniyor.
-
-Kelime: "${card.fr}" (Türkçe: ${card.tr})
-
-Sadece JSON formatında yanıt ver, başka hiçbir şey yazma:
-{
-  "anlam": "Kelimenin tam Türkçe açıklaması ve hangi bağlamlarda kullanıldığı",
-  "gramer": "Gramer bilgisi: cinsiyet (eril/dişil), tür, varsa çoğul formu, önemli notlar",
-  "gunlukKullanim": "Günlük hayatta bu kelimeyi ne zaman, nerede kullanabilirsin, pratik ipuçları",
-  "cumleler": [
-    {"zaman": "Şimdiki zaman", "fr": "Fransızca cümle", "tr": "Türkçe çeviri"},
-    {"zaman": "Geçmiş zaman", "fr": "Fransızca cümle", "tr": "Türkçe çeviri"},
-    {"zaman": "Gelecek zaman", "fr": "Fransızca cümle", "tr": "Türkçe çeviri"},
-    {"zaman": "Soru cümlesi", "fr": "Fransızca cümle", "tr": "Türkçe çeviri"}
-  ]
-}`;
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
-    });
-    const data=await res.json();
-    const raw=data.content.map(i=>i.text||'').join('');
-    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    document.getElementById('dBody').innerHTML=`
-      <div class="d-sec"><h4>📖 Anlam & Açıklama</h4><p>${parsed.anlam}</p></div>
-      <div class="d-sec"><h4>🔤 Gramer</h4><p>${parsed.gramer}</p></div>
-      <div class="d-sec"><h4>🗣️ Günlük Kullanım</h4><p>${parsed.gunlukKullanim}</p></div>
-      <div class="d-sec"><h4>💬 Farklı Zamanlarda Cümleler</h4>
-        <div class="s-list">${parsed.cumleler.map(c=>`
-          <div class="s-item">
-            <div class="s-tag">${c.zaman}</div>
-            <div class="s-fr">${c.fr}</div>
-            <div class="s-tr">${c.tr}</div>
-          </div>`).join('')}
-        </div>
-      </div>`;
-  }catch(e){
-    document.getElementById('dBody').innerHTML='<div class="d-loading" style="color:var(--danger)">⚠️ Bağlantı hatası. İnternet bağlantını kontrol et.</div>';
-  }
-}
-
-// ── JOURNAL ──
+// ══════════════════════════════════════════
+// JOURNAL
+// ══════════════════════════════════════════
 function getJ(){try{return JSON.parse(localStorage.getItem('journal')||'[]')}catch{return[]}}
 function setJ(n){localStorage.setItem('journal',JSON.stringify(n))}
-
 function loadJournal(){
-  const notes=getJ(), list=document.getElementById('jList');
+  const notes=getJ(),list=document.getElementById('jList');
   if(!notes.length){
-    list.innerHTML='<div class="empty-j"><div class="ei">📝</div><p>Henüz not yok.<br>Aşağıdan yeni gün ekle.</p></div>';
-    return;
+    list.innerHTML='<div class="empty-j"><div class="ei">📝</div><p>Henüz not yok.<br>Aşağıdan yeni gün ekle.</p></div>';return;
   }
   list.innerHTML=[...notes].reverse().map((n,ri)=>{
     const i=notes.length-1-ri;
-    const preview=n.text?n.text.substring(0,45)+'…':'Henüz yazılmamış';
+    const prev=n.text?n.text.substring(0,42)+'…':'Henüz yazılmamış';
     return`<div class="j-card" onclick="openNote(${i})">
       <div class="j-icon">📄</div>
-      <div class="j-info"><h4>${n.title||('Gün '+(i+1))}</h4><p>${n.date} · ${preview}</p></div>
-      <div class="j-arrow">›</div>
-    </div>`;
+      <div class="j-info"><h4>${n.title||('Gün '+(i+1))}</h4><p>${n.date} · ${prev}</p></div>
+      <div class="j-arrow">›</div></div>`;
   }).join('');
 }
-
 function addDay(){
   const notes=getJ();
   const d=new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'});
   notes.push({title:(notes.length+1)+'. Gün',date:d,text:''});
-  setJ(notes); openNote(notes.length-1);
+  setJ(notes);openNote(notes.length-1);
 }
-
 function openNote(i){
-  noteIdx=i;
-  const n=getJ()[i];
+  noteIdx=i;const n=getJ()[i];
   document.getElementById('nTitle').value=n.title||'';
   document.getElementById('nDate').textContent=n.date||'';
   document.getElementById('nText').value=n.text||'';
   showPage('noteEditor');
 }
-
 function saveNote(){
   const notes=getJ();
   notes[noteIdx].title=document.getElementById('nTitle').value||('Gün '+(noteIdx+1));
   notes[noteIdx].text=document.getElementById('nText').value;
-  setJ(notes); showPage('journal');
+  setJ(notes);showPage('journal');
+}
+
+// ══════════════════════════════════════════
+// GRAMMAR
+// ══════════════════════════════════════════
+function getDoneTopics(){try{return JSON.parse(localStorage.getItem('grDone')||'[]')}catch{return[]}}
+function markTopicDone(id){
+  const done=getDoneTopics();if(!done.includes(id))done.push(id);
+  localStorage.setItem('grDone',JSON.stringify(done));
+}
+function getTodayTopics(){
+  const key='grToday_'+new Date().toDateString();
+  let t=[];try{t=JSON.parse(localStorage.getItem(key)||'[]')}catch{}
+  if(!t.length){
+    // pick next 2 undone topics
+    const done=getDoneTopics();
+    const undone=GRAMMAR.filter(g=>!done.includes(g.id));
+    t=undone.slice(0,2).map(g=>g.id);
+    if(!t.length)t=GRAMMAR.slice(0,2).map(g=>g.id); // reset if all done
+    localStorage.setItem(key,JSON.stringify(t));
+  }
+  return t;
+}
+
+function loadGrammarList(){
+  const done=getDoneTopics();
+  const todayIds=getTodayTopics();
+  const list=document.getElementById('grTopicList');
+  list.innerHTML=GRAMMAR.map((g,i)=>{
+    const isDone=done.includes(g.id);
+    const isToday=todayIds.includes(g.id);
+    let badge=isDone?'<span class="gr-topic-badge badge-done">✓ Tamam</span>':
+              isToday?'<span class="gr-topic-badge badge-today">⭐ Bugün</span>':
+              '<span class="gr-topic-badge badge-new">Yeni</span>';
+    return`<div class="gr-topic-card color-${i%10} ${isDone?'done-topic':''}" onclick="startGrammarLesson(${g.id})">
+      <div class="gr-topic-num">${i+1}</div>
+      <div class="gr-topic-info"><h4>${g.title}</h4><p>${g.subtitle} · ${g.cards.length} kart</p></div>
+      ${badge}
+    </div>`;
+  }).join('');
+}
+
+function startGrammarLesson(topicId){
+  grTopicIdx=GRAMMAR.findIndex(g=>g.id===topicId);
+  grCardIdx=0;grFlipped=false;
+  const topic=GRAMMAR[grTopicIdx];
+  document.getElementById('glTitle').textContent=topic.title;
+  showPage('grammarLesson');
+  loadGrammarCard();
+}
+
+function loadGrammarCard(){
+  const topic=GRAMMAR[grTopicIdx];
+  if(grCardIdx>=topic.cards.length){showGrammarDone(topic);return}
+  grFlipped=false;
+  const card=topic.cards[grCardIdx];
+  const pct=(grCardIdx/topic.cards.length*100);
+  document.getElementById('glProgFill').style.width=pct+'%';
+
+  document.getElementById('glContent').innerHTML=`
+    <div class="gl-card-scene" onclick="flipGrammarCard()">
+      <div class="gl-card-inner" id="glCardInner">
+        <div class="gl-face gl-front">
+          <div class="gl-badge-top">📐 GRAMER KARTI ${grCardIdx+1} / ${topic.cards.length}</div>
+          <div class="gl-rule-title">${card.front.title}</div>
+          <div class="gl-rule-body">${card.front.body}</div>
+          <div class="gl-tap-hint">👆 ${card.front.hint}</div>
+        </div>
+        <div class="gl-face gl-back">
+          <div class="gl-back-title">💬 ÖRNEK CÜMLELER</div>
+          <div class="gl-examples">
+            ${card.back.examples.map(ex=>`
+              <div class="gl-ex-item">
+                <button onclick="event.stopPropagation();speakFr('${ex.fr.replace(/'/g,"\\'")}')" style="float:right;background:rgba(126,232,162,.12);border:none;border-radius:7px;padding:4px 8px;cursor:pointer;font-size:.8rem;color:var(--accent);margin-left:6px;flex-shrink:0">🔊</button>
+                <div class="gl-ex-fr">${ex.fr}</div>
+                <div class="gl-ex-tr">${ex.tr}</div>
+              </div>`).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gl-flip-hint" id="glFlipHint">Kartı görmek için dokun</div>
+    <div class="gl-action-btns" id="glActionBtns" style="opacity:0;pointer-events:none;transition:opacity .3s">
+      <button class="gl-btn-repeat" onclick="grammarAnswer(false)">↩ Tekrar Et</button>
+      <button class="gl-btn-next" onclick="grammarAnswer(true)">Anladım →</button>
+    </div>`;
+}
+
+function flipGrammarCard(){
+  grFlipped=!grFlipped;
+  const inner=document.getElementById('glCardInner');
+  if(inner)inner.classList.toggle('flipped',grFlipped);
+  const b=document.getElementById('glActionBtns');
+  const h=document.getElementById('glFlipHint');
+  if(grFlipped){if(b){b.style.opacity='1';b.style.pointerEvents='auto';}if(h)h.style.opacity='0';}
+  else{if(b){b.style.opacity='0';b.style.pointerEvents='none';}if(h)h.style.opacity='1';}
+}
+
+function grammarAnswer(understood){
+  if(understood){grCardIdx++;}
+  // if not understood, stay on same card (repeat)
+  const topic=GRAMMAR[grTopicIdx];
+  if(grCardIdx>=topic.cards.length){showGrammarDone(topic);}
+  else{
+    const scene=document.querySelector('.gl-card-scene');
+    if(scene){scene.style.cssText='opacity:0;transform:translateY(8px);transition:all .17s';}
+    setTimeout(()=>{loadGrammarCard();},170);
+  }
+}
+
+function showGrammarDone(topic){
+  markTopicDone(topic.id);
+  document.getElementById('glProgFill').style.width='100%';
+  document.getElementById('glContent').innerHTML=`
+    <div class="gl-done">
+      <div class="gl-done-icon">🏆</div>
+      <div class="gl-done-title">${topic.title}</div>
+      <p style="color:var(--muted);font-size:.85rem;text-align:center">Bu konuyu tamamladın!<br>Yarın 2 yeni konu seni bekliyor.</p>
+      <button class="btn-restart" style="background:rgba(192,132,252,.12);color:var(--purple);border-color:rgba(192,132,252,.2)" onclick="showPage('grammar')">← Konulara Dön</button>
+      <button class="btn-home2" onclick="goHome()">Ana Sayfaya Dön</button>
+    </div>`;
+  loadStats();
 }
 
 window.onload=loadStats;
