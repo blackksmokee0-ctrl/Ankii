@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kartlar</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #1a1a22;
+    --card-front: #1e1e2e;
+    --card-back: #12221e;
+    --accent: #7ee8a2;
+    --accent2: #5ec4ff;
+    --gold: #f5c842;
+    --text: #f0ede8;
+    --muted: #888899;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* BG texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(126,232,162,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(94,196,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── ANASAYFA ── */
+  #home {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    padding: 40px 20px;
+  }
+
+  .logo-area {
+    text-align: center;
+  }
+
+  .logo-area h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .logo-area p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .menu-grid {
+    display: grid;
+    gap: 16px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .menu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(126,232,162,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .menu-card:hover {
+    border-color: rgba(126,232,162,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+
+  .menu-card:hover::after { opacity: 1; }
+
+  .menu-card:active { transform: scale(0.97); }
+
+  .menu-icon {
+    font-size: 2rem;
+    width: 56px;
+    height: 56px;
+    background: rgba(126,232,162,0.08);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .menu-info h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .menu-info p {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .menu-arrow {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 1.2rem;
+  }
+
+  .stats-bar {
+    display: flex;
+    gap: 32px;
+    padding: 20px 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .stat {
+    text-align: center;
+    flex: 1;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  /* ── KART ÇALIŞMA SAYFASI ── */
+  #study {
+    display: none;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 20px 40px;
+  }
+
+  #study.active { display: flex; }
+
+  .study-header {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .back-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+  }
+
+  .back-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+
+  .deck-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+  }
+
+  .counter {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    width: 100%;
+    max-width: 420px;
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  /* THE CARD */
+  .card-scene {
+    width: 100%;
+    max-width: 420px;
+    height: 300px;
+    perspective: 1200px;
+    cursor: pointer;
+    margin-bottom: 32px;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-inner.flipped {
+    transform: rotateY(180deg);
+  }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    border: 1px solid var(--border);
+  }
+
+  .card-front {
+    background: var(--card-front);
+    background-image: 
+      radial-gradient(ellipse at 80% 20%, rgba(94,196,255,0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(126,232,162,0.06) 0%, transparent 50%);
+  }
+
+  .card-back {
+    background: var(--card-back);
+    background-image:
+      radial-gradient(ellipse at 20% 20%, rgba(126,232,162,0.1) 0%, transparent 50%);
+    transform: rotateY(180deg);
+  }
+
+  .card-lang-badge {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-sound-btn {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: rgba(126,232,162,0.1);
+    border: none;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+    color: var(--accent);
+  }
+
+  .card-sound-btn:hover { background: rgba(126,232,162,0.2); }
+
+  .card-word {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--text);
+  }
+
+  .card-hint {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .card-translation {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .card-example {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.6;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 8px;
+    width: 100%;
+  }
+
+  .card-example span {
+    display: block;
+    color: rgba(240,237,232,0.5);
+    font-style: normal;
+    margin-top: 4px;
+    font-size: 0.8rem;
+  }
+
+  /* Action buttons */
+  .action-btns {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .btn-knew, .btn-didnt {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-knew {
+    background: rgba(126,232,162,0.15);
+    color: var(--accent);
+    border: 1px solid rgba(126,232,162,0.25);
+  }
+
+  .btn-knew:hover {
+    background: rgba(126,232,162,0.25);
+    transform: translateY(-1px);
+  }
+
+  .btn-didnt {
+    background: rgba(255,100,100,0.1);
+    color: #ff8888;
+    border: 1px solid rgba(255,100,100,0.2);
+  }
+
+  .btn-didnt:hover {
+    background: rgba(255,100,100,0.18);
+    transform: translateY(-1px);
+  }
+
+  .flip-hint {
+    margin-top: 16px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+    opacity: 0.6;
+  }
+
+  /* TAMAMLANDI */
+  #done {
+    display: none;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  #done.active { display: flex; }
+
+  .done-emoji { font-size: 4rem; }
+
+  .done-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .done-stats {
+    display: flex;
+    gap: 32px;
+    padding: 24px 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+
+  .done-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+  }
+
+  .done-stat-num.green { color: var(--accent); }
+  .done-stat-num.red { color: #ff8888; }
+
+  .done-stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .btn-restart {
+    background: rgba(126,232,162,0.12);
+    border: 1px solid rgba(126,232,162,0.25);
+    color: var(--accent);
+    padding: 16px 40px;
+    border-radius: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-restart:hover { background: rgba(126,232,162,0.22); transform: translateY(-2px); }
+
+  .btn-home {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 12px 32px;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-home:hover { color: var(--text); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-scene { animation: fadeUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ── ANASAYFA ── -->
+<div id="home">
+  <div class="logo-area">
+    <h1>Kartlar</h1>
+    <p>Günlük Fransızca</p>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-num" id="totalCards">25</div>
+      <div class="stat-label">Kart</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num" id="streakNum">0</div>
+      <div class="stat-label">Gün Serisi</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num" id="masteredNum">0</div>
+      <div class="stat-label">Öğrenildi</div>
+    </div>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card" onclick="startStudy('today')">
+      <div class="menu-icon">🗓️</div>
+      <div class="menu-info">
+        <h3>Bugünün Destesi</h3>
+        <p>Fransızca • 25 kart</p>
+      </div>
+      <div class="menu-arrow">›</div>
+    </div>
+    <div class="menu-card" onclick="startStudy('shuffle')">
+      <div class="menu-icon">🔀</div>
+      <div class="menu-info">
+        <h3>Karışık Çalış</h3>
+        <p>Tüm kartlar rastgele</p>
+      </div>
+      <div class="menu-arrow">›</div>
+    </div>
+    <div class="menu-card" onclick="startStudy('hard')">
+      <div class="menu-icon">🔥</div>
+      <div class="menu-info">
+        <h3>Zor Kartlar</h3>
+        <p>Bilinmeyenler tekrar</p>
+      </div>
+      <div class="menu-arrow">›</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ÇALIŞMA SAYFASI ── -->
+<div id="study">
+  <div class="study-header">
+    <button class="back-btn" onclick="goHome()">← Geri</button>
+    <div class="deck-title">Bugünün Destesi</div>
+    <div class="counter" id="counter">1 / 25</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <div class="card-scene" onclick="flipCard()">
+    <div class="card-inner" id="cardInner">
+      <!-- FRONT -->
+      <div class="card-face card-front">
+        <span class="card-lang-badge">Français</span>
+        <button class="card-sound-btn" onclick="speakFrench(event)" title="Sesli dinle">🔊</button>
+        <div class="card-word" id="cardWord">le marché</div>
+        <div class="card-hint" id="cardHint">Dokun → çevir</div>
+      </div>
+      <!-- BACK -->
+      <div class="card-face card-back">
+        <span class="card-lang-badge">Türkçe</span>
+        <div class="card-translation" id="cardTranslation">pazar</div>
+        <div class="card-example" id="cardExample">
+          Je vais au marché le dimanche.
+          <span>Pazar günleri pazara gidiyorum.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-hint" id="flipHint">Kartı görmek için dokun</div>
+
+  <div class="action-btns" id="actionBtns" style="opacity:0;pointer-events:none;transition:opacity 0.3s;">
+    <button class="btn-didnt" onclick="answer(false)">✗ Bilmedim</button>
+    <button class="btn-knew" onclick="answer(true)">✓ Bildim</button>
+  </div>
+</div>
+
+<!-- ── BİTTİ ── -->
+<div id="done">
+  <div class="done-emoji">🎉</div>
+  <div class="done-title">Harika!</div>
+  <p style="color:var(--muted);font-size:0.9rem;">Bugünün destesini tamamladın</p>
+
+  <div class="done-stats">
+    <div class="stat">
+      <div class="done-stat-num green" id="knewCount">0</div>
+      <div class="done-stat-label">Bildim</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="done-stat-num red" id="didntCount">0</div>
+      <div class="done-stat-label">Bilmedim</div>
+    </div>
+  </div>
+
+  <button class="btn-restart" onclick="startStudy('hard')">🔥 Zor Kartları Tekrar Et</button>
+  <button class="btn-home" onclick="goHome()">Ana Sayfaya Dön</button>
+</div>
+
+<script>
+const cards = [
+  {
+    fr: "le marché",
+    tr: "pazar",
+    example: "Je vais au marché le dimanche.",
+    exampleTr: "Pazar günleri pazara gidiyorum."
+  },
+  {
+    fr: "la boulangerie",
+    tr: "fırın / ekmekçi",
+    example: "La boulangerie ouvre à sept heures.",
+    exampleTr: "Fırın saat yedide açılıyor."
+  },
+  {
+    fr: "la mairie",
+    tr: "belediye",
+    example: "Je dois aller à la mairie demain.",
+    exampleTr: "Yarın belediyeye gitmem gerekiyor."
+  },
+  {
+    fr: "l'épicerie",
+    tr: "bakkal",
+    example: "Il achète du pain à l'épicerie.",
+    exampleTr: "Bakkaldanbpazardan ekmek alıyor."
+  },
+  {
+    fr: "le trottoir",
+    tr: "kaldırım",
+    example: "Marche sur le trottoir, pas sur la route.",
+    exampleTr: "Yolda değil kaldırımda yürü."
+  },
+  {
+    fr: "l'addition",
+    tr: "hesap (restoranda)",
+    example: "L'addition, s'il vous plaît!",
+    exampleTr: "Hesabı getirir misiniz lütfen!"
+  },
+  {
+    fr: "le voisin / la voisine",
+    tr: "komşu",
+    example: "Mon voisin est très sympa.",
+    exampleTr: "Komşum çok sempatik."
+  },
+  {
+    fr: "excusez-moi",
+    tr: "affedersiniz",
+    example: "Excusez-moi, où est la gare?",
+    exampleTr: "Affedersiniz, istasyon nerede?"
+  },
+  {
+    fr: "je ne comprends pas",
+    tr: "anlamıyorum",
+    example: "Parlez lentement, je ne comprends pas.",
+    exampleTr: "Yavaş konuşun, anlamıyorum."
+  },
+  {
+    fr: "pouvez-vous répéter?",
+    tr: "tekrar eder misiniz?",
+    example: "Pouvez-vous répéter plus lentement?",
+    exampleTr: "Daha yavaş tekrar eder misiniz?"
+  },
+  {
+    fr: "bientôt",
+    tr: "yakında",
+    example: "À bientôt!",
+    exampleTr: "Görüşürüz yakında!"
+  },
+  {
+    fr: "parfois",
+    tr: "bazen",
+    example: "Je prends parfois le bus.",
+    exampleTr: "Bazen otobüse biniyorum."
+  },
+  {
+    fr: "la semaine prochaine",
+    tr: "gelecek hafta",
+    example: "On se voit la semaine prochaine?",
+    exampleTr: "Gelecek hafta görüşelim mi?"
+  },
+  {
+    fr: "le week-end",
+    tr: "hafta sonu",
+    example: "Que fais-tu ce week-end?",
+    exampleTr: "Bu hafta sonu ne yapıyorsun?"
+  },
+  {
+    fr: "souvent",
+    tr: "sık sık",
+    example: "Elle va souvent au cinéma.",
+    exampleTr: "Sinemaya sık sık gidiyor."
+  },
+  {
+    fr: "à gauche",
+    tr: "sola",
+    example: "Tournez à gauche au carrefour.",
+    exampleTr: "Kavşakta sola dönün."
+  },
+  {
+    fr: "à droite",
+    tr: "sağa",
+    example: "La banque est à droite.",
+    exampleTr: "Banka sağda."
+  },
+  {
+    fr: "tout droit",
+    tr: "düz devam et",
+    example: "Continuez tout droit pendant cent mètres.",
+    exampleTr: "Yüz metre düz devam edin."
+  },
+  {
+    fr: "l'arrêt de bus",
+    tr: "otobüs durağı",
+    example: "L'arrêt de bus est au coin de la rue.",
+    exampleTr: "Otobüs durağı köşede."
+  },
+  {
+    fr: "le guichet",
+    tr: "gişe / vezne",
+    example: "Achetez votre billet au guichet.",
+    exampleTr: "Biletinizi gişeden alın."
+  },
+  {
+    fr: "avoir faim",
+    tr: "aç olmak",
+    example: "J'ai très faim, allons manger!",
+    exampleTr: "Çok acıktım, gidip yiyelim!"
+  },
+  {
+    fr: "pressé(e)",
+    tr: "acelesi var / acelem var",
+    example: "Je suis pressé, à plus tard!",
+    exampleTr: "Acelemvar, sonra görüşürüz!"
+  },
+  {
+    fr: "perdu(e)",
+    tr: "kayboldum",
+    example: "Je suis perdu, pouvez-vous m'aider?",
+    exampleTr: "Kayboldum, yardım edebilir misiniz?"
+  },
+  {
+    fr: "content(e)",
+    tr: "mutlu / memnun",
+    example: "Je suis très content de te voir.",
+    exampleTr: "Seni görmekten çok memnunum."
+  },
+  {
+    fr: "ça m'est égal",
+    tr: "farketmez / önemli değil",
+    example: "Thé ou café? Ça m'est égal.",
+    exampleTr: "Çay mı kahve mi? Farketmez."
+  }
+];
+
+let deck = [];
+let current = 0;
+let isFlipped = false;
+let knewCount = 0;
+let didntCards = [];
+let mode = 'today';
+
+function shuffle(arr) {
+  return [...arr].sort(() => Math.random() - 0.5);
+}
+
+function startStudy(m) {
+  mode = m;
+  isFlipped = false;
+  knewCount = 0;
+  current = 0;
+
+  if (m === 'today') {
+    deck = [...cards];
+  } else if (m === 'shuffle') {
+    deck = shuffle(cards);
+  } else if (m === 'hard') {
+    deck = didntCards.length > 0 ? shuffle(didntCards) : shuffle(cards);
+    didntCards = [];
+  }
+
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('done').classList.remove('active');
+  document.getElementById('study').classList.add('active');
+  loadCard();
+}
+
+function loadCard() {
+  if (current >= deck.length) {
+    showDone();
+    return;
+  }
+
+  const card = deck[current];
+  isFlipped = false;
+
+  const inner = document.getElementById('cardInner');
+  inner.classList.remove('flipped');
+
+  document.getElementById('cardWord').textContent = card.fr;
+  document.getElementById('cardTranslation').textContent = card.tr;
+  document.getElementById('cardExample').innerHTML =
+    card.example + '<span>' + card.exampleTr + '</span>';
+
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + deck.length;
+
+  const pct = (current / deck.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const btns = document.getElementById('actionBtns');
+  btns.style.opacity = '0';
+  btns.style.pointerEvents = 'none';
+
+  document.getElementById('flipHint').style.opacity = '1';
+}
+
+function flipCard() {
+  const inner = document.getElementById('cardInner');
+  isFlipped = !isFlipped;
+  inner.classList.toggle('flipped', isFlipped);
+
+  const btns = document.getElementById('actionBtns');
+  if (isFlipped) {
+    btns.style.opacity = '1';
+    btns.style.pointerEvents = 'auto';
+    document.getElementById('flipHint').style.opacity = '0';
+    // Auto-speak when flipped to front
+    speakFrench(null);
+  } else {
+    btns.style.opacity = '0';
+    btns.style.pointerEvents = 'none';
+  }
+}
+
+function speakFrench(e) {
+  if (e) e.stopPropagation();
+  const text = deck[current].fr;
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'fr-FR';
+    utter.rate = 0.85;
+    window.speechSynthesis.speak(utter);
+  }
+}
+
+function answer(knew) {
+  if (knew) {
+    knewCount++;
+  } else {
+    didntCards.push(deck[current]);
+  }
+  current++;
+
+  // Quick fade animation
+  const scene = document.querySelector('.card-scene');
+  scene.style.opacity = '0';
+  scene.style.transform = 'translateY(10px)';
+  scene.style.transition = 'all 0.2s ease';
+
+  setTimeout(() => {
+    loadCard();
+    scene.style.opacity = '1';
+    scene.style.transform = 'translateY(0)';
+  }, 200);
+}
+
+function showDone() {
+  document.getElementById('study').classList.remove('active');
+  document.getElementById('done').classList.add('active');
+  document.getElementById('knewCount').textContent = knewCount;
+  document.getElementById('didntCount').textContent = deck.length - knewCount;
+
+  // Update mastered on home
+  const prev = parseInt(localStorage.getItem('mastered') || '0');
+  const newMastered = Math.max(prev, knewCount);
+  localStorage.setItem('mastered', newMastered);
+  document.getElementById('masteredNum').textContent = newMastered;
+
+  // Streak
+  const today = new Date().toDateString();
+  const lastDay = localStorage.getItem('lastDay');
+  let streak = parseInt(localStorage.getItem('streak') || '0');
+  if (lastDay !== today) {
+    streak++;
+    localStorage.setItem('streak', streak);
+    localStorage.setItem('lastDay', today);
+  }
+  document.getElementById('streakNum').textContent = streak;
+}
+
+function goHome() {
+  document.getElementById('study').classList.remove('active');
+  document.getElementById('done').classList.remove('active');
+  document.getElementById('home').style.display = 'flex';
+
+  // Load saved stats
+  document.getElementById('streakNum').textContent = localStorage.getItem('streak') || '0';
+  document.getElementById('masteredNum').textContent = localStorage.getItem('mastered') || '0';
+}
+
+// Init stats
+window.onload = () => {
+  document.getElementById('streakNum').textContent = localStorage.getItem('streak') || '0';
+  document.getElementById('masteredNum').textContent = localStorage.getItem('mastered') || '0';
+};
+</script>
+</body>
+</html>
