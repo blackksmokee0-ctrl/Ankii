@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kartlar</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -230,7 +230,7 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
 .color-9::before{background:#a78bfa}
 </style>
 </head>
-<body>
+<body style="overscroll-behavior-y:none;touch-action:pan-x pan-y;">
 
 <!-- ══════════ HOME ══════════ -->
 <div id="home" class="page active">
@@ -279,9 +279,13 @@ body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
     </div>
   </div>
   <div class="flip-hint" id="flipHint">Kartı görmek için dokun</div>
-  <div class="action-btns" id="actionBtns" style="opacity:0;pointer-events:none;transition:opacity .3s">
+  <div class="action-btns" id="actionBtns" style="transition:opacity .3s">
     <button class="btn-didnt" onclick="answer(false)">✗ Bilmedim</button>
     <button class="btn-knew" onclick="answer(true)">✓ Bildim</button>
+  </div>
+  <div style="display:flex;justify-content:space-between;width:100%;max-width:440px;margin-top:8px;gap:12px;">
+    <button onclick="answer(false)" style="flex:1;padding:16px;border-radius:16px;border:2px solid rgba(255,80,80,0.4);background:rgba(255,80,80,0.1);color:#ff6060;font-size:1.6rem;cursor:pointer;font-weight:bold;">← Bilmedim</button>
+    <button onclick="answer(true)" style="flex:1;padding:16px;border-radius:16px;border:2px solid rgba(80,255,160,0.4);background:rgba(80,255,160,0.1);color:#50e090;font-size:1.6rem;cursor:pointer;font-weight:bold;">Bildim →</button>
   </div>
   <button class="fab" onclick="openDetail()">+</button>
 </div>
@@ -409,6 +413,86 @@ const CARDS=[
    detail:{anlam:"Mutlu, memnun, hoşnut. 'Je suis content' = mutluyum / memnunum.",gramer:"Sıfat. Erkek: content, kadın: contente. 'Être content(e) de...' + fiil mastarı.",gunluk:"Birileriyle tanışınca 'Je suis content de vous connaître' (Sizi tanımaktan memnunum) diyebilirsin.",cumleler:[{z:"Şimdiki",fr:"Je suis très content.",tr:"Çok mutluyum."},{z:"Tanışma",fr:"Je suis content de vous rencontrer.",tr:"Sizinle tanışmaktan memnunum."},{z:"Haber",fr:"Je suis content d'apprendre ça.",tr:"Bunu öğrenmekten memnunum."},{z:"Soru",fr:"Tu es content ici?",tr:"Burada mutlu musun?"}]}},
   {fr:"ça m'est égal",tr:"farketmez / önemli değil",ex:"Thé ou café? Ça m'est égal.",exTr:"Çay mı kahve mi? Farketmez.",
    detail:{anlam:"Farketmez, önemli değil, her şey aynı benim için. Tercih fark etmediğinde kullanılır.",gramer:"'Ça' (bu) + 'm'est' (bana) + 'égal' (eşit/fark etmez). Kalıp ifade.",gunluk:"Birileri sana seçenek sunduğunda nazikçe 'fark etmez' demek için. Hafif vurdumduymazlık da içerebilir.",cumleler:[{z:"Tercih",fr:"Ça m'est égal, choisis toi.",tr:"Farketmez, sen seç."},{z:"Restoran",fr:"Pizza ou pâtes? Ça m'est égal.",tr:"Pizza mı makarna mı? Farketmez."},{z:"Güçlü",fr:"Vraiment, ça m'est complètement égal.",tr:"Gerçekten, hiç fark etmez."},{z:"Soru",fr:"Tu as une préférence? — Ça m'est égal.",tr:"Bir tercihin var mı? — Farketmez."}]}}
+  ,{fr:"la chambre",tr:"yatak odası",ex:"Ma chambre est petite mais confortable.",exTr:"Yatak odam küçük ama rahat.",
+   detail:{anlam:"Yatak odası. Evdeki uyku ve dinlenme alanı.",gramer:"Dişil isim (féminin). 'La' artikel alır. Çoğul: les chambres.",gunluk:"Ev ararken ya da otelde oda sorarken kullanırsın. 'J'ai une grande chambre' diyebilirsin.",cumleler:[{z:"Şimdiki",fr:"Je suis dans ma chambre.",tr:"Yatak odamdayım."},{z:"Geçmiş",fr:"J'ai rangé ma chambre.",tr:"Yatak odamı topladım."},{z:"Gelecek",fr:"Je vais nettoyer ma chambre.",tr:"Yatak odamı temizleyeceğim."},{z:"Soru",fr:"Ta chambre est grande?",tr:"Yatak odan büyük mü?"}]}}
+  ,{fr:"le salon",tr:"oturma odası",ex:"On regarde la télé dans le salon.",exTr:"Oturma odasında televizyon izliyoruz.",
+   detail:{anlam:"Oturma odası, misafir odası. Evin ana yaşam alanı.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Ev hayatından bahsederken çok kullanılır. 'On se retrouve au salon' (Oturma odasında buluşalım).",cumleler:[{z:"Şimdiki",fr:"Je lis dans le salon.",tr:"Oturma odasında okuyorum."},{z:"Geçmiş",fr:"On a mangé dans le salon.",tr:"Oturma odasında yedik."},{z:"Gelecek",fr:"Je vais décorer le salon.",tr:"Oturma odasını dekore edeceğim."},{z:"Soru",fr:"Le salon est grand?",tr:"Oturma odası büyük mü?"}]}}
+  ,{fr:"la cuisine",tr:"mutfak",ex:"Je fais la cuisine tous les soirs.",exTr:"Her akşam yemek yapıyorum.",
+   detail:{anlam:"Mutfak. Hem oda hem de yemek pişirme anlamına gelir. 'Faire la cuisine' = yemek yapmak.",gramer:"Dişil isim (féminin). 'La' artikel alır.",gunluk:"'Je suis en cuisine' (Mutfaktayım) veya 'J'aime faire la cuisine' (Yemek yapmayı seviyorum).",cumleler:[{z:"Şimdiki",fr:"Je cuisine ce soir.",tr:"Bu akşam yemek yapıyorum."},{z:"Geçmiş",fr:"J'ai cuisiné hier.",tr:"Dün yemek yaptım."},{z:"Gelecek",fr:"Je vais faire la cuisine.",tr:"Yemek yapacağım."},{z:"Soru",fr:"Tu sais faire la cuisine?",tr:"Yemek yapmayı biliyor musun?"}]}}
+  ,{fr:"le balcon",tr:"balkon",ex:"Je prends mon café sur le balcon.",exTr:"Balkonda kahvemi içiyorum.",
+   detail:{anlam:"Balkon. Apartman dairelerinin dış alanı.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Valence'ta güzel havada balkonda oturmak için. 'On peut s'asseoir sur le balcon?' (Balkona oturabilir miyiz?)",cumleler:[{z:"Şimdiki",fr:"Je suis sur le balcon.",tr:"Balkondayım."},{z:"Geçmiş",fr:"J'ai dormi sur le balcon.",tr:"Balkonda uyudum."},{z:"Gelecek",fr:"Je vais arroser les plantes sur le balcon.",tr:"Balkondaki çiçekleri sulayacağım."},{z:"Soru",fr:"Tu as un balcon?",tr:"Balkonun var mı?"}]}}
+  ,{fr:"la pluie",tr:"yağmur",ex:"La pluie est forte aujourd'hui.",exTr:"Bugün yağmur çok şiddetli.",
+   detail:{anlam:"Yağmur. Hava durumundan bahsederken temel kelime.",gramer:"Dişil isim (féminin). 'Il pleut' = yağmur yağıyor (fiil formu).",gunluk:"'Il va pleuvoir' (Yağmur yağacak), 'J'aime la pluie' (Yağmuru seviyorum).",cumleler:[{z:"Şimdiki",fr:"Il pleut dehors.",tr:"Dışarıda yağmur yağıyor."},{z:"Geçmiş",fr:"Il a plu toute la nuit.",tr:"Bütün gece yağmur yağdı."},{z:"Gelecek",fr:"Il va pleuvoir ce soir.",tr:"Bu akşam yağmur yağacak."},{z:"Soru",fr:"Tu aimes la pluie?",tr:"Yağmuru sever misin?"}]}}
+  ,{fr:"le soleil",tr:"güneş",ex:"Le soleil brille aujourd'hui.",exTr:"Bugün güneş parlıyor.",
+   detail:{anlam:"Güneş. Hava durumu ve günlük konuşmalarda çok kullanılır.",gramer:"Eril isim (masculin). 'Il y a du soleil' = hava güneşli.",gunluk:"'Il fait beau' (Hava güzel) ile birlikte kullanılır. 'On profite du soleil!' (Güneşin tadını çıkaralım!)",cumleler:[{z:"Şimdiki",fr:"Il y a du soleil.",tr:"Hava güneşli."},{z:"Geçmiş",fr:"Il a fait soleil hier.",tr:"Dün hava güneşliydi."},{z:"Gelecek",fr:"Il y aura du soleil demain.",tr:"Yarın hava güneşli olacak."},{z:"Soru",fr:"Il y a du soleil à Valence?",tr:"Valence'ta hava güneşli mi?"}]}}
+  ,{fr:"la neige",tr:"kar",ex:"Il y a beaucoup de neige en montagne.",exTr:"Dağlarda çok kar var.",
+   detail:{anlam:"Kar. Kış mevsimi ve hava durumu konuşmalarında kullanılır.",gramer:"Dişil isim (féminin). 'Il neige' = kar yağıyor.",gunluk:"'Il neige dehors!' (Dışarıda kar yağıyor!) veya 'J'adore la neige' (Karı çok seviyorum).",cumleler:[{z:"Şimdiki",fr:"Il neige ce matin.",tr:"Bu sabah kar yağıyor."},{z:"Geçmiş",fr:"Il a neigé hier.",tr:"Dün kar yağdı."},{z:"Gelecek",fr:"Il va neiger ce soir.",tr:"Bu akşam kar yağacak."},{z:"Soru",fr:"Tu as vu la neige?",tr:"Kar gördün mü?"}]}}
+  ,{fr:"le manteau",tr:"palto / kaban",ex:"Je mets mon manteau, il fait froid.",exTr:"Kabanımı giyiyorum, hava soğuk.",
+   detail:{anlam:"Palto, kaban. Kış giyisisi.",gramer:"Eril isim (masculin). 'Le' artikel alır. Çoğul: les manteaux.",gunluk:"Kış aylarında her gün kullanırsın. 'Prends ton manteau!' (Kabanını al!)",cumleler:[{z:"Şimdiki",fr:"Je porte un manteau.",tr:"Kaban giyiyorum."},{z:"Geçmiş",fr:"J'ai oublié mon manteau.",tr:"Kabanımı unuttum."},{z:"Gelecek",fr:"Je vais acheter un nouveau manteau.",tr:"Yeni bir kaban alacağım."},{z:"Soru",fr:"Tu as un manteau chaud?",tr:"Sıcak bir kabanın var mı?"}]}}
+  ,{fr:"la robe",tr:"elbise",ex:"Elle porte une belle robe rouge.",exTr:"Güzel kırmızı bir elbise giyiyor.",
+   detail:{anlam:"Elbise. Kadın giysisi.",gramer:"Dişil isim (féminin). 'La' artikel alır.",gunluk:"Alışveriş yaparken veya birinin kıyafetini tarif ederken kullanırsın.",cumleler:[{z:"Şimdiki",fr:"Elle porte une robe.",tr:"Elbise giyiyor."},{z:"Geçmiş",fr:"J'ai acheté une robe.",tr:"Bir elbise aldım."},{z:"Gelecek",fr:"Je vais mettre ma robe.",tr:"Elbisemi giyeceğim."},{z:"Soru",fr:"Tu aimes ma robe?",tr:"Elbisemi beğendin mi?"}]}}
+  ,{fr:"le pantalon",tr:"pantolon",ex:"Ce pantalon est trop grand pour moi.",exTr:"Bu pantolon bana çok büyük.",
+   detail:{anlam:"Pantolon. Fransızcada tekil kullanılır.",gramer:"Eril isim (masculin). 'Le' artikel alır. Dikkat: Fransızcada tekil!",gunluk:"Alışveriş veya kıyafet konuşmalarında. 'Ce pantalon me va bien?' (Bu pantolon bana yakışıyor mu?)",cumleler:[{z:"Şimdiki",fr:"Je porte un pantalon noir.",tr:"Siyah pantolon giyiyorum."},{z:"Geçmiş",fr:"J'ai lavé mon pantalon.",tr:"Pantolonumu yıkadım."},{z:"Gelecek",fr:"Je vais acheter un pantalon.",tr:"Pantolon alacağım."},{z:"Soru",fr:"Tu aimes ce pantalon?",tr:"Bu pantolonu beğendin mi?"}]}}
+  ,{fr:"la chaussure",tr:"ayakkabı",ex:"Ces chaussures sont très confortables.",exTr:"Bu ayakkabılar çok rahat.",
+   detail:{anlam:"Ayakkabı. Genellikle çoğul kullanılır: 'les chaussures'.",gramer:"Dişil isim (féminin). Çoğul: les chaussures. 'Une paire de chaussures' = bir çift ayakkabı.",gunluk:"Alışveriş veya hazırlanma konuşmalarında. 'Mets tes chaussures!' (Ayakkabılarını giy!)",cumleler:[{z:"Şimdiki",fr:"Je mets mes chaussures.",tr:"Ayakkabılarımı giyiyorum."},{z:"Geçmiş",fr:"J'ai acheté des chaussures.",tr:"Ayakkabı aldım."},{z:"Gelecek",fr:"Je vais nettoyer mes chaussures.",tr:"Ayakkabılarımı temizleyeceğim."},{z:"Soru",fr:"Tu aimes ces chaussures?",tr:"Bu ayakkabıları beğendin mi?"}]}}
+  ,{fr:"le sac",tr:"çanta",ex:"Mon sac est trop lourd aujourd'hui.",exTr:"Çantam bugün çok ağır.",
+   detail:{anlam:"Çanta. Her türlü çanta için kullanılır. 'Le sac à dos' = sırt çantası.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Alışveriş veya günlük hayatta. 'Tu as mon sac?' (Çantam sende mi?)",cumleler:[{z:"Şimdiki",fr:"Je cherche mon sac.",tr:"Çantamı arıyorum."},{z:"Geçmiş",fr:"J'ai perdu mon sac.",tr:"Çantamı kaybettim."},{z:"Gelecek",fr:"Je vais acheter un nouveau sac.",tr:"Yeni bir çanta alacağım."},{z:"Soru",fr:"Tu as vu mon sac?",tr:"Çantamı gördün mü?"}]}}
+  ,{fr:"la clé",tr:"anahtar",ex:"J'ai oublié mes clés à la maison.",exTr:"Anahtarlarımı evde unuttum.",
+   detail:{anlam:"Anahtar. Hem kapı anahtarı hem de mecazi anlamda kullanılır.",gramer:"Dişil isim (féminin). Çoğul: les clés. 'La clé de voiture' = araba anahtarı.",gunluk:"Çok sık kullanılan kelime! 'Tu as les clés?' (Anahtarlar sende mi?)",cumleler:[{z:"Şimdiki",fr:"Je cherche mes clés.",tr:"Anahtarlarımı arıyorum."},{z:"Geçmiş",fr:"J'ai perdu ma clé.",tr:"Anahtarımı kaybettim."},{z:"Gelecek",fr:"Je vais faire une copie de la clé.",tr:"Anahtarın kopyasını çıkaracağım."},{z:"Soru",fr:"Tu as la clé?",tr:"Anahtar sende mi?"}]}}
+  ,{fr:"le portefeuille",tr:"cüzdan",ex:"Mon portefeuille est dans ma poche.",exTr:"Cüzdanım cebimde.",
+   detail:{anlam:"Cüzdan. Para, kart ve belgelerin tutulduğu küçük çanta.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Ödeme yaparken veya bir şey ararken. 'J'ai oublié mon portefeuille!' (Cüzdanımı unuttum!)",cumleler:[{z:"Şimdiki",fr:"Je cherche mon portefeuille.",tr:"Cüzdanımı arıyorum."},{z:"Geçmiş",fr:"J'ai perdu mon portefeuille.",tr:"Cüzdanımı kaybettim."},{z:"Gelecek",fr:"Je vais acheter un nouveau portefeuille.",tr:"Yeni bir cüzdan alacağım."},{z:"Soru",fr:"Tu as vu mon portefeuille?",tr:"Cüzdanımı gördün mü?"}]}}
+  ,{fr:"la monnaie",tr:"bozuk para / üstü",ex:"Vous avez la monnaie?",exTr:"Bozuk paranız var mı?",
+   detail:{anlam:"Bozuk para ya da para üstü. 'Rendre la monnaie' = üstü vermek.",gramer:"Dişil isim (féminin). 'La petite monnaie' = bozuk para.",gunluk:"Kasada veya markette çok kullanılır. 'Gardez la monnaie!' (Üstü kalsın!)",cumleler:[{z:"Şimdiki",fr:"Je n'ai pas de monnaie.",tr:"Bozuk param yok."},{z:"Geçmiş",fr:"Il m'a rendu la monnaie.",tr:"Üstümü verdi."},{z:"Gelecek",fr:"Je vais faire de la monnaie.",tr:"Para bozduracağım."},{z:"Soru",fr:"Vous avez de la monnaie?",tr:"Bozuk paranız var mı?"}]}}
+  ,{fr:"le repas",tr:"yemek (öğün)",ex:"Le repas est prêt!",exTr:"Yemek hazır!",
+   detail:{anlam:"Yemek öğünü. 'Le petit-déjeuner' kahvaltı, 'le déjeuner' öğle, 'le dîner' akşam yemeği.",gramer:"Eril isim (masculin). 'Le' artikel alır. Çoğul: les repas.",gunluk:"'Bon repas!' (İyi yemekler!), 'Le repas est délicieux' (Yemek çok güzel).",cumleler:[{z:"Şimdiki",fr:"Je prépare le repas.",tr:"Yemeği hazırlıyorum."},{z:"Geçmiş",fr:"On a partagé un bon repas.",tr:"Güzel bir yemek paylaştık."},{z:"Gelecek",fr:"Le repas sera prêt à 20h.",tr:"Yemek 20'de hazır olacak."},{z:"Soru",fr:"Le repas est prêt?",tr:"Yemek hazır mı?"}]}}
+  ,{fr:"la viande",tr:"et",ex:"Je mange peu de viande.",exTr:"Az et yiyorum.",
+   detail:{anlam:"Et. Her türlü et için genel kelime.",gramer:"Dişil isim (féminin). 'La viande rouge' = kırmızı et, 'la viande blanche' = beyaz et.",gunluk:"Restoranda sipariş verirken veya markette. 'Je ne mange pas de viande' (Et yemiyorum).",cumleler:[{z:"Şimdiki",fr:"Je mange de la viande.",tr:"Et yiyorum."},{z:"Geçmiş",fr:"J'ai acheté de la viande.",tr:"Et aldım."},{z:"Gelecek",fr:"Je vais cuisiner de la viande.",tr:"Et pişireceğim."},{z:"Soru",fr:"Tu manges de la viande?",tr:"Et yer misin?"}]}}
+  ,{fr:"le poisson",tr:"balık",ex:"Le poisson est très frais ici.",exTr:"Buradaki balık çok taze.",
+   detail:{anlam:"Balık. Hem hayvan hem de yemek olarak balık.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Restoranda veya markette. 'Je préfère le poisson à la viande' (Ete tercih ederim balığı).",cumleler:[{z:"Şimdiki",fr:"Je mange du poisson.",tr:"Balık yiyorum."},{z:"Geçmiş",fr:"On a mangé du poisson.",tr:"Balık yedik."},{z:"Gelecek",fr:"Je vais commander du poisson.",tr:"Balık sipariş edeceğim."},{z:"Soru",fr:"Tu aimes le poisson?",tr:"Balığı sever misin?"}]}}
+  ,{fr:"la pomme",tr:"elma",ex:"Une pomme par jour éloigne le médecin.",exTr:"Günde bir elma doktoru uzak tutar.",
+   detail:{anlam:"Elma. En yaygın meyve kelimelerinden biri.",gramer:"Dişil isim (féminin). 'La' artikel alır. Çoğul: les pommes.",gunluk:"Markette veya meyve alırken. 'Je voudrais un kilo de pommes' (Bir kilo elma istiyorum).",cumleler:[{z:"Şimdiki",fr:"Je mange une pomme.",tr:"Elma yiyorum."},{z:"Geçmiş",fr:"J'ai acheté des pommes.",tr:"Elma aldım."},{z:"Gelecek",fr:"Je vais faire une tarte aux pommes.",tr:"Elmalı turta yapacağım."},{z:"Soru",fr:"Tu veux une pomme?",tr:"Elma ister misin?"}]}}
+  ,{fr:"la bouteille",tr:"şişe",ex:"Une bouteille d'eau, s'il vous plaît.",exTr:"Bir şişe su, lütfen.",
+   detail:{anlam:"Şişe. Su, şarap, süt gibi her türlü şişe için.",gramer:"Dişil isim (féminin). 'Une bouteille de...' = bir şişe...",gunluk:"Restoranda veya markette çok kullanılır. 'Une bouteille de vin' (Bir şişe şarap).",cumleler:[{z:"Şimdiki",fr:"Je bois une bouteille d'eau.",tr:"Bir şişe su içiyorum."},{z:"Geçmiş",fr:"J'ai acheté une bouteille.",tr:"Bir şişe aldım."},{z:"Gelecek",fr:"Je vais ouvrir une bouteille.",tr:"Bir şişe açacağım."},{z:"Soru",fr:"Tu as une bouteille d'eau?",tr:"Su şişen var mı?"}]}}
+  ,{fr:"le verre",tr:"bardak",ex:"Un verre d'eau, s'il vous plaît.",exTr:"Bir bardak su, lütfen.",
+   detail:{anlam:"Bardak. Hem kap hem de içindeki miktar için. 'Un verre de vin' = bir kadeh şarap.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Restoranda veya evde çok kullanılır. 'Tu veux un verre?' (Bir kadeh ister misin?)",cumleler:[{z:"Şimdiki",fr:"Je bois un verre.",tr:"Bir bardak içiyorum."},{z:"Geçmiş",fr:"J'ai cassé un verre.",tr:"Bir bardak kırdım."},{z:"Gelecek",fr:"Je vais prendre un verre.",tr:"Bir şey içeceğim."},{z:"Soru",fr:"Tu veux un verre?",tr:"Bir şey içer misin?"}]}}
+  ,{fr:"l'assiette",tr:"tabak",ex:"Mon assiette est vide, c'était délicieux!",exTr:"Tabağım boş, çok lezzetliydi!",
+   detail:{anlam:"Tabak. Yemek tabağı.",gramer:"Dişil isim (féminin). Sesli harfle başlar, 'l' alır.",gunluk:"Yemekte veya restoranda. 'Une assiette de soupe' (Bir tabak çorba).",cumleler:[{z:"Şimdiki",fr:"Mon assiette est pleine.",tr:"Tabağım dolu."},{z:"Geçmiş",fr:"J'ai lavé les assiettes.",tr:"Tabakları yıkadım."},{z:"Gelecek",fr:"Je vais servir les assiettes.",tr:"Tabakları koyacağım."},{z:"Soru",fr:"Tu veux une autre assiette?",tr:"Bir tabak daha ister misin?"}]}}
+  ,{fr:"la serviette",tr:"peçete / havlu",ex:"Passe-moi la serviette, s'il te plaît.",exTr:"Peçeteyi uzatır mısın lütfen.",
+   detail:{anlam:"Hem peçete hem de havlu anlamına gelir. Bağlamdan anlaşılır.",gramer:"Dişil isim (féminin). 'La serviette de bain' = banyo havlusu, 'la serviette en papier' = kağıt peçete.",gunluk:"Masada 'la serviette', banyoda da 'la serviette' iki anlam var, dikkat!",cumleler:[{z:"Şimdiki",fr:"Je cherche une serviette.",tr:"Peçete arıyorum."},{z:"Geçmiş",fr:"J'ai utilisé une serviette.",tr:"Peçete kullandım."},{z:"Gelecek",fr:"Je vais apporter des serviettes.",tr:"Peçete getireceğim."},{z:"Soru",fr:"Tu as une serviette propre?",tr:"Temiz peçeten var mı?"}]}}
+  ,{fr:"le pourboire",tr:"bahşiş",ex:"Je laisse un pourboire pour le serveur.",exTr:"Garsona bahşiş bırakıyorum.",
+   detail:{anlam:"Bahşiş. Fransa'da zorunlu değil ama takdir edilir.",gramer:"Eril isim (masculin). 'Laisser un pourboire' = bahşiş bırakmak.",gunluk:"Restorandan çıkarken. 'Je laisse un pourboire?' (Bahşiş bırakayım mı?) Fransa'da yüzde 5-10 yeterli.",cumleler:[{z:"Şimdiki",fr:"Je laisse un pourboire.",tr:"Bahşiş bırakıyorum."},{z:"Geçmiş",fr:"J'ai laissé un bon pourboire.",tr:"İyi bir bahşiş bıraktım."},{z:"Gelecek",fr:"Je vais laisser un pourboire.",tr:"Bahşiş bırakacağım."},{z:"Soru",fr:"On laisse un pourboire?",tr:"Bahşiş bırakalım mı?"}]}}
+  ,{fr:"la rue",tr:"sokak",ex:"Cette rue est très animée le soir.",exTr:"Bu sokak akşamları çok canlı.",
+   detail:{anlam:"Sokak, cadde. Adres verirken temel kelime.",gramer:"Dişil isim (féminin). Adres adlarında kullanılır: 'rue de la Paix'.",gunluk:"Adres sorarken ve verirken. 'J'habite rue Victor Hugo' (Victor Hugo Sokağında oturuyorum).",cumleler:[{z:"Şimdiki",fr:"Je marche dans la rue.",tr:"Sokakta yürüyorum."},{z:"Geçmiş",fr:"J'ai traversé la rue.",tr:"Sokağı geçtim."},{z:"Gelecek",fr:"Je vais dans cette rue.",tr:"O sokağa gideceğim."},{z:"Soru",fr:"C'est quelle rue?",tr:"Bu hangi sokak?"}]}}
+  ,{fr:"le quartier",tr:"mahalle",ex:"J'aime bien mon quartier.",exTr:"Mahallemizi çok seviyorum.",
+   detail:{anlam:"Mahalle, semt. Bir şehrin belirli bir bölgesi.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Valence'ta yaşarken çok kullanırsın. 'C'est dans quel quartier?' (Hangi mahallede?)",cumleler:[{z:"Şimdiki",fr:"J'habite dans ce quartier.",tr:"Bu mahallede oturuyorum."},{z:"Geçmiş",fr:"J'ai exploré le quartier.",tr:"Mahalleyi keşfettim."},{z:"Gelecek",fr:"Je vais découvrir ce quartier.",tr:"Bu mahalleyi keşfedeceğim."},{z:"Soru",fr:"Tu connais ce quartier?",tr:"Bu mahalleyi tanıyor musun?"}]}}
+  ,{fr:"l'immeuble",tr:"apartman",ex:"J'habite dans un grand immeuble.",exTr:"Büyük bir apartmanda oturuyorum.",
+   detail:{anlam:"Apartman binası. Çok katlı konut binası.",gramer:"Eril isim (masculin). Sesli harfle başlar, 'l' alır.",gunluk:"Adres verirken veya ev anlatırken. 'C'est quel immeuble?' (Hangi apartman?)",cumleler:[{z:"Şimdiki",fr:"Mon immeuble est ancien.",tr:"Apartmanım eski."},{z:"Geçmiş",fr:"J'ai déménagé dans cet immeuble.",tr:"Bu apartmana taşındım."},{z:"Gelecek",fr:"Je vais chercher un immeuble.",tr:"Apartman arayacağım."},{z:"Soru",fr:"C'est quel immeuble?",tr:"Hangi apartman?"}]}}
+  ,{fr:"la porte",tr:"kapı",ex:"Ferme la porte, s'il te plaît.",exTr:"Kapıyı kapat lütfen.",
+   detail:{anlam:"Kapı. Hem iç kapı hem de dış kapı için kullanılır.",gramer:"Dişil isim (féminin). 'La' artikel alır. 'La porte d'entrée' = giriş kapısı.",gunluk:"Günlük hayatta çok kullanılır. 'Ouvre la porte!' (Kapıyı aç!)",cumleler:[{z:"Şimdiki",fr:"La porte est fermée.",tr:"Kapı kapalı."},{z:"Geçmiş",fr:"J'ai ouvert la porte.",tr:"Kapıyı açtım."},{z:"Gelecek",fr:"Je vais fermer la porte.",tr:"Kapıyı kapatacağım."},{z:"Soru",fr:"La porte est ouverte?",tr:"Kapı açık mı?"}]}}
+  ,{fr:"le couloir",tr:"koridor",ex:"Les enfants courent dans le couloir.",exTr:"Çocuklar koridorda koşuyor.",
+   detail:{anlam:"Koridor, hol. Apartman veya bina içindeki geçit.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Apartmanda veya iş yerinde. 'C'est au bout du couloir' (Koridorun sonunda).",cumleler:[{z:"Şimdiki",fr:"Je suis dans le couloir.",tr:"Koridordayım."},{z:"Geçmiş",fr:"J'ai traversé le couloir.",tr:"Koridoru geçtim."},{z:"Gelecek",fr:"Attends-moi dans le couloir.",tr:"Koridorda bekle beni."},{z:"Soru",fr:"C'est au bout du couloir?",tr:"Koridorun sonunda mı?"}]}}
+  ,{fr:"la douche",tr:"duş",ex:"Je prends une douche rapide.",exTr:"Hızlı bir duş alıyorum.",
+   detail:{anlam:"Duş. Banyo içindeki duş veya duş alma eylemi.",gramer:"Dişil isim (féminin). 'Prendre une douche' = duş almak.",gunluk:"'Je vais prendre ma douche' (Duşumu alacağım). Sabah rutininde sık kullanılır.",cumleler:[{z:"Şimdiki",fr:"Je prends ma douche.",tr:"Duşumu alıyorum."},{z:"Geçmiş",fr:"J'ai pris une douche.",tr:"Duş aldım."},{z:"Gelecek",fr:"Je vais prendre une douche.",tr:"Duş alacağım."},{z:"Soru",fr:"La douche est libre?",tr:"Duş boş mu?"}]}}
+  ,{fr:"le miroir",tr:"ayna",ex:"Je me regarde dans le miroir.",exTr:"Aynaya bakıyorum.",
+   detail:{anlam:"Ayna. Yansıma ve bakma eylemi için kullanılır.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Sabah hazırlanırken. 'Tu es devant le miroir!' (Aynanın önündesin!)",cumleler:[{z:"Şimdiki",fr:"Je regarde dans le miroir.",tr:"Aynaya bakıyorum."},{z:"Geçmiş",fr:"J'ai cassé le miroir.",tr:"Aynayı kırdım."},{z:"Gelecek",fr:"Je vais accrocher le miroir.",tr:"Aynayı asmayacağım."},{z:"Soru",fr:"Tu as vu le miroir?",tr:"Aynayı gördün mü?"}]}}
+  ,{fr:"la lampe",tr:"lamba",ex:"Allume la lampe, s'il te plaît.",exTr:"Lambayı aç lütfen.",
+   detail:{anlam:"Lamba. Hem masa lambası hem de genel aydınlatma için.",gramer:"Dişil isim (féminin). 'Allumer la lampe' = lambayı açmak, 'éteindre la lampe' = kapatmak.",gunluk:"'La lampe ne marche pas' (Lamba çalışmıyor).",cumleler:[{z:"Şimdiki",fr:"La lampe est allumée.",tr:"Lamba açık."},{z:"Geçmiş",fr:"J'ai éteint la lampe.",tr:"Lambayı kapattım."},{z:"Gelecek",fr:"Je vais allumer la lampe.",tr:"Lambayı açacağım."},{z:"Soru",fr:"La lampe marche?",tr:"Lamba çalışıyor mu?"}]}}
+  ,{fr:"le lit",tr:"yatak",ex:"Je fais mon lit chaque matin.",exTr:"Her sabah yatağımı yapıyorum.",
+   detail:{anlam:"Yatak. Uyunan mobilya.",gramer:"Eril isim (masculin). 'Le' artikel alır. 'Faire le lit' = yatak yapmak.",gunluk:"'Je vais au lit' (Yatağa gidiyorum), 'Au lit!' (Yatağa!) çocuklara söylenir.",cumleler:[{z:"Şimdiki",fr:"Je suis au lit.",tr:"Yataktayım."},{z:"Geçmiş",fr:"J'ai fait mon lit.",tr:"Yatağımı yaptım."},{z:"Gelecek",fr:"Je vais me mettre au lit.",tr:"Yatağa gireceğim."},{z:"Soru",fr:"Le lit est confortable?",tr:"Yatak rahat mı?"}]}}
+  ,{fr:"la table",tr:"masa",ex:"On mange à table dans dix minutes.",exTr:"On dakika sonra masaya yemek yiyoruz.",
+   detail:{anlam:"Masa. Hem yemek masası hem de çalışma masası.",gramer:"Dişil isim (féminin). 'La' artikel alır. 'À table!' = Sofraya!",gunluk:"'Mets la table' (Masayı kur), 'À table!' (Yemeğe gel!) çok kullanılır.",cumleler:[{z:"Şimdiki",fr:"Je mets la table.",tr:"Masayı kuruyorum."},{z:"Geçmiş",fr:"On a mangé à table.",tr:"Masada yedik."},{z:"Gelecek",fr:"Je vais ranger la table.",tr:"Masayı toplayacağım."},{z:"Soru",fr:"La table est libre?",tr:"Masa boş mu?"}]}}
+  ,{fr:"le fauteuil",tr:"koltuk",ex:"Grand-père dort dans son fauteuil.",exTr:"Dede koltuğunda uyuyor.",
+   detail:{anlam:"Tekli koltuk, berjer. Kanepeden farklı olarak tek kişiliktir.",gramer:"Eril isim (masculin). 'Le fauteuil' tekli koltuk, 'le canapé' kanepe.",gunluk:"Ev eşyaları alırken veya oturma odasını tarif ederken.",cumleler:[{z:"Şimdiki",fr:"Je lis dans mon fauteuil.",tr:"Koltuğumda okuyorum."},{z:"Geçmiş",fr:"J'ai acheté un fauteuil.",tr:"Koltuk aldım."},{z:"Gelecek",fr:"Je vais m'asseoir dans le fauteuil.",tr:"Koltuğa oturacağım."},{z:"Soru",fr:"Le fauteuil est confortable?",tr:"Koltuk rahat mı?"}]}}
+  ,{fr:"la chaise",tr:"sandalye",ex:"Tire une chaise et assieds-toi.",exTr:"Bir sandalye çek ve otur.",
+   detail:{anlam:"Sandalye. Koltuktan farklı, sırtlıklı oturma aracı.",gramer:"Dişil isim (féminin). 'La' artikel alır. Çoğul: les chaises.",gunluk:"Masaya oturma davetinde. 'Prends une chaise!' (Bir sandalye al!)",cumleler:[{z:"Şimdiki",fr:"Je suis assis sur une chaise.",tr:"Sandalyede oturuyorum."},{z:"Geçmiş",fr:"J'ai apporté une chaise.",tr:"Sandalye getirdim."},{z:"Gelecek",fr:"Je vais prendre une chaise.",tr:"Sandalye alacağım."},{z:"Soru",fr:"Il y a une chaise libre?",tr:"Boş sandalye var mı?"}]}}
+  ,{fr:"le rideau",tr:"perde",ex:"Ouvre les rideaux, il fait beau!",exTr:"Perdeleri aç, hava güzel!",
+   detail:{anlam:"Perde. Genellikle çoğul kullanılır: 'les rideaux'.",gramer:"Eril isim (masculin). Çoğul: les rideaux. 'Tirer les rideaux' = perdeleri çekmek.",gunluk:"Sabah kalktığında. 'Ferme les rideaux' (Perdeleri kapat).",cumleler:[{z:"Şimdiki",fr:"Je ferme les rideaux.",tr:"Perdeleri kapatıyorum."},{z:"Geçmiş",fr:"J'ai ouvert les rideaux.",tr:"Perdeleri açtım."},{z:"Gelecek",fr:"Je vais tirer les rideaux.",tr:"Perdeleri çekeceğim."},{z:"Soru",fr:"Les rideaux sont ouverts?",tr:"Perdeler açık mı?"}]}}
+  ,{fr:"la poubelle",tr:"çöp kutusu",ex:"Tu peux sortir la poubelle?",exTr:"Çöpü çıkarabilir misin?",
+   detail:{anlam:"Çöp kutusu, çöp kovası. 'Sortir la poubelle' = çöpü dışarı çıkarmak.",gramer:"Dişil isim (féminin). 'La' artikel alır.",gunluk:"Ev işlerinde çok kullanılır. 'La poubelle est pleine!' (Çöp kutusu doldu!)",cumleler:[{z:"Şimdiki",fr:"La poubelle est pleine.",tr:"Çöp kutusu dolu."},{z:"Geçmiş",fr:"J'ai sorti la poubelle.",tr:"Çöpü çıkardım."},{z:"Gelecek",fr:"Je vais vider la poubelle.",tr:"Çöp kutusunu boşaltacağım."},{z:"Soru",fr:"Tu as sorti la poubelle?",tr:"Çöpü çıkardın mı?"}]}}
+  ,{fr:"le tapis",tr:"halı",ex:"Le chat dort sur le tapis.",exTr:"Kedi halının üzerinde uyuyor.",
+   detail:{anlam:"Halı. Yerden küçük halı veya büyük halı için kullanılır.",gramer:"Eril isim (masculin). 'Le' artikel alır.",gunluk:"Ev eşyaları veya temizlik konuşmalarında. 'Passe l'aspirateur sur le tapis' (Halıyı süpür).",cumleler:[{z:"Şimdiki",fr:"Je nettoie le tapis.",tr:"Halıyı temizliyorum."},{z:"Geçmiş",fr:"J'ai acheté un tapis.",tr:"Halı aldım."},{z:"Gelecek",fr:"Je vais passer l'aspirateur sur le tapis.",tr:"Halıyı süpüreceğim."},{z:"Soru",fr:"Le tapis est propre?",tr:"Halı temiz mi?"}]}}
+  ,{fr:"l'étagère",tr:"raf",ex:"Les livres sont sur l'étagère.",exTr:"Kitaplar rafın üzerinde.",
+   detail:{anlam:"Raf, kitaplık. Duvara monte veya serbest duran raf.",gramer:"Dişil isim (féminin). Sesli harfle başlar, 'l' alır.",gunluk:"Ev düzenlerken. 'Mets-le sur l'étagère' (Rafa koy).",cumleler:[{z:"Şimdiki",fr:"Je range sur l'étagère.",tr:"Rafa kaldırıyorum."},{z:"Geçmiş",fr:"J'ai accroché une étagère.",tr:"Raf astım."},{z:"Gelecek",fr:"Je vais mettre ça sur l'étagère.",tr:"Bunu rafa koyacağım."},{z:"Soru",fr:"C'est sur quelle étagère?",tr:"Hangi rafta?"}]}}
 ];
 
 // ══════════════════════════════════════════
@@ -553,7 +637,7 @@ function loadCard(){
   document.getElementById('cardEx').innerHTML=c.ex+'<span>'+c.exTr+'</span>';
   document.getElementById('counter').textContent=(cur+1)+' / '+deck.length;
   document.getElementById('progFill').style.width=(cur/deck.length*100)+'%';
-  const b=document.getElementById('actionBtns');b.style.opacity='0';b.style.pointerEvents='none';
+  // buttons always visible
   document.getElementById('flipHint').style.opacity='1';
 }
 function flipCard(){
@@ -777,6 +861,65 @@ function showGrammarDone(topic){
     </div>`;
   loadStats();
 }
+
+function speakFr(text){
+  if(!('speechSynthesis' in window))return;
+  window.speechSynthesis.cancel();
+  setTimeout(()=>{
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang='fr-FR';u.rate=.82;
+    u.pitch=1;
+    // Ses yoksa fr-FR sesi yüklenene kadar bekle
+    const voices=window.speechSynthesis.getVoices();
+    const frVoice=voices.find(v=>v.lang.startsWith('fr'));
+    if(frVoice)u.voice=frVoice;
+    window.speechSynthesis.speak(u);
+  },100);
+}
+// Sesler önceden yüklensin
+if('speechSynthesis' in window){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+}
+
+// ── SWIPE ile kart geçişi ──
+(function(){
+  let startX=0,startY=0,startT=0;
+  document.addEventListener('touchstart',function(e){
+    startX=e.touches[0].clientX;
+    startY=e.touches[0].clientY;
+    startT=Date.now();
+  },{passive:true});
+  
+  document.addEventListener('touchend',function(e){
+    const pg=document.querySelector('.page.active');
+    if(!pg||pg.id!=='study')return; // sadece study sayfasında
+    const dx=e.changedTouches[0].clientX-startX;
+    const dy=e.changedTouches[0].clientY-startY;
+    const dt=Date.now()-startT;
+    if(dt>500)return; // çok yavaşsa iptal
+    if(Math.abs(dx)<60&&Math.abs(dy)<60)return; // çok kısaysa iptal
+    if(Math.abs(dx)>Math.abs(dy)){
+      // Yatay swipe - her zaman çalışır
+      if(dx>60){answer(true);}  // sağa = Bildim
+      else if(dx<-60){answer(false);} // sola = Bilmedim
+    } else {
+      // Dikey swipe - pull-to-refresh engelle
+      e.preventDefault();
+    }
+  },{passive:false});
+  
+  // Pull-to-refresh'i engelle
+  document.addEventListener('touchmove',function(e){
+    if(e.touches.length>1)return;
+    const pg=document.querySelector('.page.active');
+    if(pg&&pg.id==='study'){
+      if(window.scrollY===0&&e.touches[0].clientY>startY){
+        e.preventDefault();
+      }
+    }
+  },{passive:false});
+})();
 
 window.onload=loadStats;
 </script>
